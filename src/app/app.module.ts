@@ -3,18 +3,43 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DragulaModule } from 'ng2-dragula';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DemoComponent } from './demo/demo.component';
+import {
+  SWIPER_CONFIG,
+  SwiperConfigInterface,
+  SwiperModule,
+} from 'ngx-swiper-wrapper';
+
+const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
+  direction: 'horizontal',
+  effect: 'coverflow',
+  grabCursor: true,
+  centeredSlides: true,
+  slidesPerView: 'auto',
+  coverflowEffect: {
+    rotate: 50,
+    stretch: 10,
+    depth: 100,
+    modifier: 0.7,
+    slideShadows: false,
+  },
+};
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, DemoComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DragulaModule.forRoot(),
     BrowserAnimationsModule,
+    SwiperModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: SWIPER_CONFIG,
+      useValue: DEFAULT_SWIPER_CONFIG,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

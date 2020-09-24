@@ -1,3 +1,5 @@
+@import "~swiper/swiper";
+
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import "~@angular/material/theming";
@@ -45,10 +47,12 @@ $fgc2-theme: mat-light-theme(
   filter: alpha(opacity=80);
   pointer-events: none;
 }
+
 /* high-performance display:none; helper */
 .gu-hide {
   left: -9999px !important;
 }
+
 /* added to mirrorContainer (default = body) while dragging */
 .gu-unselectable {
   -webkit-user-select: none !important;
@@ -56,6 +60,7 @@ $fgc2-theme: mat-light-theme(
   -ms-user-select: none !important;
   user-select: none !important;
 }
+
 /* added to the source element while its mirror is dragged */
 .gu-transit {
   opacity: 0.2;
@@ -67,7 +72,18 @@ html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.swiper-slide {
+  opacity: 0.5;
+
+  &.swiper-slide-active,
+  &.swiper-slide-prev,
+  &.swiper-slide-next {
+    opacity: 1;
+  }
 }
