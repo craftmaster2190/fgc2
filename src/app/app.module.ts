@@ -10,6 +10,7 @@ import {
   SwiperConfigInterface,
   SwiperModule,
 } from 'ngx-swiper-wrapper';
+import { SwipeSelectComponent } from './swipe-select/swipe-select.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -27,7 +28,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 };
 
 @NgModule({
-  declarations: [AppComponent, DemoComponent],
+  declarations: [AppComponent, DemoComponent, SwipeSelectComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

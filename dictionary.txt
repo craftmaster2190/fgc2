@@ -9,3 +9,4 @@ dragula
 unselectable
 swiper
 dallin
+jvectormap

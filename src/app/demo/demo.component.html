@@ -7,7 +7,7 @@
   >
     <ng-template [ngForOf]="['russell', 'dallin', 'henry']" let-person ngFor>
       <div style="width: 300px; height: 300px; text-align: center">
-        <img [src]="'assets/' + person + '.jpeg'" height="300">
+        <img [src]="'assets/people/' + person + '.jpg'" height="300" />
       </div>
     </ng-template>
   </swiper>
@@ -19,7 +19,9 @@
 >
   <div style="width: 100%; max-width: 500px; height: 100px">
     <swiper
-      (swiperClick)="selectedTieColor[selectedPerson] = $event[0].clickedIndex"
+      (swiperClick)="
+        click($event); selectedTieColor[selectedPerson] = $event[0].clickedIndex
+      "
       [(index)]="selectedTieColor[selectedPerson]"
     >
       <ng-template
@@ -39,7 +41,7 @@
         ngFor
       >
         <div style="width: 100px; height: 100px; text-align: center">
-          <img [src]="'assets/' + color + '-tie.jpg'" height="100">
+          <img [src]="'assets/ties/' + color + '-tie.jpg'" height="100" />
         </div>
       </ng-template>
     </swiper>
@@ -73,8 +75,15 @@
             align-items: center;
             margin: 0 4px;
           "
-        >{{ session }}</div>
+        >
+          {{ session }}
+        </div>
       </ng-template>
     </swiper>
   </div>
 </div>
+
+<app-swipe-select
+  [(selectedIndex)]="onePerson"
+  [array]="persons"
+></app-swipe-select>
