@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Session } from '../session-icon/session-icon.component';
 
 @Component({
   selector: 'app-demo',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DemoComponent implements OnInit {
   constructor() {}
+
   selectedPerson = 0;
   selectedTieColor = { 0: 0, 1: 0, 2: 0 };
   selectedSession = { 0: 0, 1: 0, 2: 0 };

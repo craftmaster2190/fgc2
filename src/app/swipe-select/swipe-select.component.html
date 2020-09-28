@@ -1,15 +1,22 @@
-<div class="person-selector" style="width: 100%; height: 300px">
+<div [style.height.px]="imageHeight" style="width: 100%">
   <swiper
     (indexChange)="onIndexChange($event)"
     (swiperClick)="onSwiperClick($event)"
     [index]="selectedIndex"
+    [style.height.px]="imageHeight"
   >
     <ng-template [ngForOf]="array" let-index="index" let-item ngFor>
-      <div style="width: 300px; height: 300px; text-align: center">
+      <div
+        [style.height.px]="imageHeight"
+        [style.width.px]="imageWidth"
+        style="text-align: center"
+      >
         <img
           (click)="updateSelectedIndex(index)"
+          [alt]="item.name"
+          [height]="imageHeight"
           [src]="item.src"
-          height="300"
+          style="border-radius: 50%"
         />
       </div>
     </ng-template>

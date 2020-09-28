@@ -1,0 +1,23 @@
+:host {
+  position: relative;
+  display: block;
+}
+
+.person-image {
+  height: 300px;
+  border-radius: 50%;
+}
+
+.tie-select-container {
+  position: absolute;
+  top: 210px;
+  height: 100px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  place-content: center center;
+
+  app-tie-select {
+    max-width: 500px;
+  }
+}

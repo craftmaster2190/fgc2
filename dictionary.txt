@@ -10,3 +10,4 @@ unselectable
 swiper
 dallin
 jvectormap
+Tammudu

@@ -1,0 +1,31 @@
+:host {
+  display: flex;
+  width: 50px;
+  height: 50px;
+  place-content: center center;
+}
+
+.session-icon {
+  width: 50px;
+  height: 50px;
+  background: black;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  place-content: center center;
+
+  .session-icon-large {
+    font-size: 250%;
+  }
+
+  .session-icon-medium {
+    font-size: 150%;
+  }
+
+  .session-icon-small {
+    font-size: 90%;
+    line-height: 80%;
+  }
+}

@@ -1,0 +1,8 @@
+<swiper>
+  <ng-template [ngForOf]="sessions" let-session ngFor>
+    <app-session-icon
+      [session]="session"
+      style="width: 70px; height: 60px"
+    ></app-session-icon>
+  </ng-template>
+</swiper>

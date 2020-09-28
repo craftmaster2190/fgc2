@@ -1,13 +1,22 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+export interface SwipeInputItem {
+  src: string;
+  name?: string;
+}
+
+export type SwipeInputArray = Array<SwipeInputItem>;
+
 @Component({
   selector: 'app-swipe-select',
   templateUrl: './swipe-select.component.html',
   styleUrls: ['./swipe-select.component.scss'],
 })
 export class SwipeSelectComponent implements OnInit {
-  @Input() array: Array<{ src: string }>;
+  @Input() array: SwipeInputArray;
   @Input() selectedIndex: number;
+  @Input() imageHeight: number;
+  @Input() imageWidth: number;
   @Output() selectedIndexChange = new EventEmitter<number>();
 
   constructor() {}

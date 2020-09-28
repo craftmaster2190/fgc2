@@ -1,0 +1,29 @@
+<ng-template [ngIf]="sessionName === 'SaturdayMorningSession'">
+  <div class="session-icon">
+    <div class="session-icon-medium">Sat</div>
+    <div class="session-icon-small">AM</div>
+  </div>
+</ng-template>
+<ng-template [ngIf]="sessionName === 'SaturdayAfternoonSession'">
+  <div class="session-icon">
+    <div class="session-icon-medium">Sat</div>
+    <div class="session-icon-small">PM</div>
+  </div>
+</ng-template>
+<ng-template [ngIf]="sessionName === 'PriesthoodSession'">
+  <div class="session-icon">
+    <div class="session-icon-large">P</div>
+  </div>
+</ng-template>
+<ng-template [ngIf]="sessionName === 'SundayMorningSession'">
+  <div class="session-icon">
+    <div class="session-icon-medium">Sun</div>
+    <div class="session-icon-small">AM</div>
+  </div>
+</ng-template>
+<ng-template [ngIf]="sessionName === 'SundayAfternoonSession'">
+  <div class="session-icon">
+    <div class="session-icon-medium">Sun</div>
+    <div class="session-icon-small">PM</div>
+  </div>
+</ng-template>
