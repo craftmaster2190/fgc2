@@ -17,6 +17,8 @@ import { PersonSelectorComponent } from './person-selector/person-selector.compo
 import { SessionSelectorComponent } from './session-selector/session-selector.component';
 import { PersonDetailsSelectorComponent } from './person-details-selector/person-details-selector.component';
 import { TieSelectComponent } from './tie-select/tie-select.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PersonDetailsSelectorDialogComponent } from './person-details-selector-dialog/person-details-selector-dialog.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -44,12 +46,14 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     SessionSelectorComponent,
     PersonDetailsSelectorComponent,
     TieSelectComponent,
+    PersonDetailsSelectorDialogComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SwiperModule,
+    MatDialogModule,
   ],
   providers: [
     {
