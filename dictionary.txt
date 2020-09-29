@@ -11,3 +11,5 @@ swiper
 dallin
 jvectormap
 Tammudu
+merc
+jquery

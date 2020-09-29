@@ -19,6 +19,7 @@ import { PersonDetailsSelectorComponent } from './person-details-selector/person
 import { TieSelectComponent } from './tie-select/tie-select.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PersonDetailsSelectorDialogComponent } from './person-details-selector-dialog/person-details-selector-dialog.component';
+import { TempleMapComponent } from './temple-map/temple-map.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -47,6 +48,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     PersonDetailsSelectorComponent,
     TieSelectComponent,
     PersonDetailsSelectorDialogComponent,
+    TempleMapComponent,
   ],
   imports: [
     BrowserModule,
