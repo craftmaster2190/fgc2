@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Session } from '../session-icon/session-icon.component';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Session, Sessions } from '../data/session';
 
 @Component({
   selector: 'app-session-selector',
@@ -7,15 +7,33 @@ import { Session } from '../session-icon/session-icon.component';
   styleUrls: ['./session-selector.component.scss'],
 })
 export class SessionSelectorComponent implements OnInit {
-  sessions = [
-    Session.SaturdayMorningSession,
-    Session.SaturdayAfternoonSession,
-    Session.PriesthoodSession,
-    Session.SundayMorningSession,
-    Session.SundayAfternoonSession,
-  ];
+  @Input() public selectedSession: Session;
+  @Output() public selectedSessionChange = new EventEmitter<Session>();
 
-  constructor() {}
+  public readonly sessions = Sessions;
 
-  ngOnInit(): void {}
+  public constructor() {}
+
+  public ngOnInit(): void {}
+
+  public get selectedIndex(): number {
+    const selectedIndex = this.sessions.indexOf(this.selectedSession);
+    return selectedIndex > -1 ? selectedIndex : undefined;
+  }
+
+  public updateSelectedIndex(value: number): void {
+    this.selectedSession = this.sessions[value];
+    this.selectedSessionChange.emit(this.selectedSession);
+  }
+
+  public onSwiperClick($event): void {
+    const { clickedIndex } = $event.find((ev) => 'clickedIndex' in ev);
+    if (clickedIndex != null) {
+      this.updateSelectedIndex(clickedIndex);
+    }
+  }
+
+  public onIndexChange($event): void {
+    this.updateSelectedIndex($event);
+  }
 }

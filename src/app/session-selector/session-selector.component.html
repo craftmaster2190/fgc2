@@ -1,6 +1,11 @@
-<swiper>
-  <ng-template [ngForOf]="sessions" let-session ngFor>
+<swiper
+  (indexChange)="onIndexChange($event)"
+  (swiperClick)="onSwiperClick($event)"
+  [index]="selectedIndex"
+>
+  <ng-template [ngForOf]="sessions" let-index="index" let-session ngFor>
     <app-session-icon
+      (click)="updateSelectedIndex(index)"
       [session]="session"
       style="width: 70px; height: 60px"
     ></app-session-icon>

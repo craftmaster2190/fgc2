@@ -13,31 +13,29 @@ export type SwipeInputArray = Array<SwipeInputItem>;
   styleUrls: ['./swipe-select.component.scss'],
 })
 export class SwipeSelectComponent implements OnInit {
-  @Input() array: SwipeInputArray;
-  @Input() selectedIndex: number;
-  @Input() imageHeight: number;
-  @Input() imageWidth: number;
-  @Output() selectedIndexChange = new EventEmitter<number>();
+  @Input() public array: SwipeInputArray;
+  @Input() public imageHeight: number;
+  @Input() public imageWidth: number;
+  @Input() public selectedIndex: number;
+  @Output() public selectedIndexChange = new EventEmitter<number>();
 
-  constructor() {}
+  public constructor() {}
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {}
 
-  updateSelectedIndex(value: number): void {
+  public updateSelectedIndex(value: number): void {
     this.selectedIndex = value;
     this.selectedIndexChange.emit(value);
   }
 
-  onSwiperClick($event): void {
+  public onSwiperClick($event): void {
     const { clickedIndex } = $event.find((ev) => 'clickedIndex' in ev);
-    console.log('onSwiperClick', clickedIndex, $event);
     if (clickedIndex != null) {
       this.updateSelectedIndex(clickedIndex);
     }
   }
 
-  onIndexChange($event): void {
-    console.log('onIndexChange', $event);
+  public onIndexChange($event): void {
     this.updateSelectedIndex($event);
   }
 }

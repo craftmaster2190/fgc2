@@ -21,16 +21,16 @@ type VectorMap = JQuery & {
   styleUrls: ['./temple-map.component.scss'],
 })
 export class TempleMapComponent implements OnInit, AfterViewInit {
-  @ViewChild('map') mapElement: ElementRef;
+  @ViewChild('map') public mapElement: ElementRef;
   private mapObject;
   private selectedRegions = [];
-  private regionNames: { [key: string]: string } = {};
+  private readonly regionNames: { [key: string]: string } = {};
 
-  constructor(private readonly ngZone: NgZone) {}
+  public constructor(private readonly ngZone: NgZone) {}
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {}
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     this.ngZone.runOutsideAngular(() => {
       jQuery(async () => {
         const mapName = 'world-merc';
@@ -76,7 +76,7 @@ export class TempleMapComponent implements OnInit, AfterViewInit {
     });
   }
 
-  updateSelectedRegions(regions: Array<string>): void {
+  public updateSelectedRegions(regions: Array<string>): void {
     this.ngZone.runOutsideAngular(() => {
       if (arrayEquals(regions, this.selectedRegions)) {
         return;
@@ -88,7 +88,7 @@ export class TempleMapComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getSelectedRegionNames(): string {
+  public getSelectedRegionNames(): string {
     return englishAndJoin(
       this.selectedRegions.map((regionKey) => this.regionNames[regionKey])
     );

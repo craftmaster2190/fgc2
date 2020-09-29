@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Session } from '../session-icon/session-icon.component';
+import { Session } from '../data/session';
 
 @Component({
   selector: 'app-demo',
@@ -7,20 +7,16 @@ import { Session } from '../session-icon/session-icon.component';
   styleUrls: ['./demo.component.scss'],
 })
 export class DemoComponent implements OnInit {
-  constructor() {}
+  public constructor() {}
 
-  selectedPerson = 0;
-  selectedTieColor = { 0: 0, 1: 0, 2: 0 };
-  selectedSession = { 0: 0, 1: 0, 2: 0 };
+  public selectedPerson = 0;
+  public selectedTieColor = { 0: 0, 1: 0, 2: 0 };
+  public selectedSession = { 0: 0, 1: 0, 2: 0 };
 
-  persons = ['russell', 'dallin', 'henry'].map((person) => ({
+  public persons = ['russell', 'dallin', 'henry'].map((person) => ({
     src: 'assets/people/' + person + '.jpg',
   }));
-  onePerson: 1;
+  public onePerson: 1;
 
-  ngOnInit(): void {}
-
-  click(val): void {
-    console.log('click', val);
-  }
+  public ngOnInit(): void {}
 }

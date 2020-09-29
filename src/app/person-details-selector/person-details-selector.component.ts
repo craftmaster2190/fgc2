@@ -7,10 +7,10 @@ import { SwipeInputArray } from '../swipe-select/swipe-select.component';
   styleUrls: ['./person-details-selector.component.scss'],
 })
 export class PersonDetailsSelectorComponent implements OnInit {
-  @Input() src: string;
-  @Input() alt: string;
+  @Input() public src: string;
+  @Input() public alt: string;
 
-  constructor() {}
+  public constructor() {}
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {}
 }

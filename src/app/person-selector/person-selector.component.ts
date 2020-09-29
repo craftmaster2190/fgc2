@@ -8,14 +8,14 @@ import { PersonDetailsSelectorDialogComponent } from '../person-details-selector
   styleUrls: ['./person-selector.component.scss'],
 })
 export class PersonSelectorComponent implements OnInit {
-  @Input() src: string;
-  @Input() alt: string;
+  @Input() public src: string;
+  @Input() public alt: string;
 
-  constructor(private readonly matDialog: MatDialog) {}
+  public constructor(private readonly matDialog: MatDialog) {}
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {}
 
-  openDialog(): void {
+  public openDialog(): void {
     this.matDialog.open(PersonDetailsSelectorDialogComponent, {
       data: {
         src: this.src,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SwipeInputArray } from '../swipe-select/swipe-select.component';
+import { ChoirColorsSwipeArray } from '../data/choir-color';
 
 const choirColorInit = (color, suffix) => ({
   src: `assets/choir/${color}.${suffix}`,
@@ -12,27 +13,14 @@ const choirColorInit = (color, suffix) => ({
   styleUrls: ['./choir-swipe-select.component.scss'],
 })
 export class ChoirSwipeSelectComponent implements OnInit {
-  selectedChoirColor;
-  choirColors: SwipeInputArray = [
-    'black',
-    'blue-sky',
-    'blue-teal',
-    'blue',
-    'pastel-bright',
-    'pastel-dark',
-    'pastel-neutral',
-    'pastel-pink-valentines',
-    'purple-light',
-    'purple-neutral',
-    'purple',
-    'red-bright',
-    'red-dark',
-    'red-mauve',
-    'red-pink',
-    'white',
-  ].map((color) => ({ src: 'assets/choir/' + color + '.png', name: color }));
+  public selectedChoirColor;
+  public choirColors = ChoirColorsSwipeArray;
 
-  constructor() {}
+  public constructor() {}
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {}
+
+  public getColorName(): string {
+    return this.choirColors[this.selectedChoirColor]?.name;
+  }
 }

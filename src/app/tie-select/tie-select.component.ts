@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SwipeInputArray } from '../swipe-select/swipe-select.component';
+import { TieColorsSwipeArray } from '../data/tie-color';
 
 @Component({
   selector: 'app-tie-select',
@@ -7,24 +7,10 @@ import { SwipeInputArray } from '../swipe-select/swipe-select.component';
   styleUrls: ['./tie-select.component.scss'],
 })
 export class TieSelectComponent implements OnInit {
-  selectedTie;
-  ties: SwipeInputArray = [
-    'brown',
-    'pink',
-    'red',
-    'purple',
-    'black',
-    'blue',
-    'sky',
-    'green',
-    'orange',
-    'yellow',
-  ].map((color) => ({
-    src: 'assets/ties/' + color + '-tie.jpg',
-    name: color,
-  }));
+  public selectedTie;
+  public ties = TieColorsSwipeArray;
 
-  constructor() {}
+  public constructor() {}
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {}
 }

@@ -7,12 +7,12 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./person-details-selector-dialog.component.scss'],
 })
 export class PersonDetailsSelectorDialogComponent implements OnInit {
-  src: string;
-  alt: string;
+  public src: string;
+  public alt: string;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data) {
+  public constructor(@Inject(MAT_DIALOG_DATA) data) {
     Object.assign(this, data ?? {});
   }
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {}
 }
