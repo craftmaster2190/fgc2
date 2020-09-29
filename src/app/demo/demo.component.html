@@ -1,13 +1,19 @@
+{{ person }} is speaking during {{ session }} wearing {{ tieColor }} tie.
 <app-person-selector
-  alt="Russel M. Nelson"
+  [(session)]="session"
+  [(tieColor)]="tieColor"
+  [alt]="person"
   src="assets/people/russell.jpg"
 ></app-person-selector>
 
-<app-choir-swipe-select></app-choir-swipe-select>
+The choir will wear {{ choirColor }}.
+<app-choir-swipe-select [(selectedColor)]="choirColor"></app-choir-swipe-select>
 
 <!--<app-person-details-selector-->
 <!--  alt="Russel M. Nelson"-->
 <!--  src="assets/people/russell.jpg"-->
 <!--&gt;</app-person-details-selector>-->
 
-<app-temple-map></app-temple-map>
+There will be new temples in {{ temples }}
+<app-temple-map [(selectedRegionNames)]="temples" mode="world"></app-temple-map>
+<!--<app-temple-map mode="usa"></app-temple-map>-->

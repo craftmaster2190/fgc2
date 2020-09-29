@@ -1,9 +1,12 @@
 <app-swipe-select
-  [(selectedIndex)]="selectedChoirColor"
+  (selectedIndexChange)="selectedIndexChange($event)"
   [array]="choirColors"
   [imageHeight]="200"
   [imageWidth]="300"
+  [selectedIndex]="selectedIndex"
   style="height: 215px"
 ></app-swipe-select>
 
-<div class="fgc-flex-center">{{ getColorName() }}</div>
+<div class="fgc-flex-center">1{{ selectedIndex }}</div>
+<div class="fgc-flex-center">2{{ selectedColor }}</div>
+<div class="fgc-flex-center">3{{ getColorName() }}</div>

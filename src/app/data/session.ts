@@ -1,9 +1,9 @@
 export enum Session {
-  SaturdayMorningSession,
-  SaturdayAfternoonSession,
-  PriesthoodSession,
-  SundayMorningSession,
-  SundayAfternoonSession,
+  SaturdayMorningSession = 'SaturdayMorningSession',
+  SaturdayAfternoonSession = 'SaturdayAfternoonSession',
+  PriesthoodSession = 'PriesthoodSession',
+  SundayMorningSession = 'SundayMorningSession',
+  SundayAfternoonSession = 'SundayAfternoonSession',
 }
 
 export const Sessions = [

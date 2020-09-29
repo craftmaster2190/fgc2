@@ -1,16 +1,16 @@
 import { SwipeInputArray } from '../swipe-select/swipe-select.component';
 
 export enum TieColor {
-  'brown',
-  'pink',
-  'red',
-  'purple',
-  'black',
-  'blue',
-  'sky',
-  'green',
-  'orange',
-  'yellow',
+  'brown' = 'brown',
+  'pink' = 'pink',
+  'red' = 'red',
+  'purple' = 'purple',
+  'black' = 'black',
+  'blue' = 'blue',
+  'sky' = 'sky',
+  'green' = 'green',
+  'orange' = 'orange',
+  'yellow' = 'yellow',
 }
 
 export const TieColors = [

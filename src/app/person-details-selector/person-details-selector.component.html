@@ -3,9 +3,17 @@
 </div>
 
 <div class="tie-select-container">
-  <app-tie-select></app-tie-select>
+  <app-tie-select
+    (selectedTieChange)="onSelectedTieChange($event)"
+    [selectedTie]="selectedTie"
+  ></app-tie-select>
 </div>
 
 <div class="fgc-flex-center" style="margin-top: 14px">
-  <app-session-selector></app-session-selector>
+  <app-session-selector
+    (selectedSessionChange)="onSelectedSessionChange($event)"
+    [selectedSession]="selectedSession"
+  ></app-session-selector>
 </div>
+
+Session: {{ selectedSession }}

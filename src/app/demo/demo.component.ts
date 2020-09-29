@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Session } from '../data/session';
+import { TieColor } from '../data/tie-color';
+import { ChoirColor } from '../data/choir-color';
+import { CountryNames } from '../data/countries';
 
 @Component({
   selector: 'app-demo',
@@ -9,14 +12,11 @@ import { Session } from '../data/session';
 export class DemoComponent implements OnInit {
   public constructor() {}
 
-  public selectedPerson = 0;
-  public selectedTieColor = { 0: 0, 1: 0, 2: 0 };
-  public selectedSession = { 0: 0, 1: 0, 2: 0 };
-
-  public persons = ['russell', 'dallin', 'henry'].map((person) => ({
-    src: 'assets/people/' + person + '.jpg',
-  }));
-  public onePerson: 1;
+  public person = 'Russel M. Nelson';
+  public session: Session = Session.PriesthoodSession;
+  public tieColor: TieColor = TieColor.green;
+  public choirColor: ChoirColor = ChoirColor.redMauve;
+  public temples: Array<string> = CountryNames.slice(0, 3);
 
   public ngOnInit(): void {}
 }

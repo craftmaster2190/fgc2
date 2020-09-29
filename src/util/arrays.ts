@@ -20,6 +20,14 @@ export function arrayEquals<T>(a: Array<T>, b: Array<T>): boolean {
   return true;
 }
 
+export function indexOfOrUndefined<T>(
+  array: Array<T>,
+  find: T
+): number | undefined {
+  const index = array?.indexOf(find);
+  return index != null && index > -1 ? index : undefined;
+}
+
 export function englishAndJoin<T>(array: Array<T>): string {
   if (array.length <= 1) {
     return array.join(', ');

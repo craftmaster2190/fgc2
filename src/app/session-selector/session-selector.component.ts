@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Session, Sessions } from '../data/session';
+import { indexOfOrUndefined } from '../../util/arrays';
 
 @Component({
   selector: 'app-session-selector',
@@ -17,8 +18,7 @@ export class SessionSelectorComponent implements OnInit {
   public ngOnInit(): void {}
 
   public get selectedIndex(): number {
-    const selectedIndex = this.sessions.indexOf(this.selectedSession);
-    return selectedIndex > -1 ? selectedIndex : undefined;
+    return indexOfOrUndefined(this.sessions, this.selectedSession);
   }
 
   public updateSelectedIndex(value: number): void {

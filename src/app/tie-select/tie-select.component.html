@@ -1,6 +1,7 @@
 <app-swipe-select
-  [(selectedIndex)]="selectedTie"
+  (selectedIndexChange)="onSwipeUpdateTie($event)"
   [array]="ties"
   [imageHeight]="100"
   [imageWidth]="100"
+  [selectedIndex]="selectedTieIndex"
 ></app-swipe-select>

@@ -1,6 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { SwipeInputArray } from '../swipe-select/swipe-select.component';
-import { ChoirColorsSwipeArray } from '../data/choir-color';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import {
+  ChoirColor,
+  ChoirColors,
+  ChoirColorsSwipeArray,
+} from '../data/choir-color';
+import { indexOfOrUndefined } from '../../util/arrays';
 
 const choirColorInit = (color, suffix) => ({
   src: `assets/choir/${color}.${suffix}`,
@@ -12,15 +23,27 @@ const choirColorInit = (color, suffix) => ({
   templateUrl: './choir-swipe-select.component.html',
   styleUrls: ['./choir-swipe-select.component.scss'],
 })
-export class ChoirSwipeSelectComponent implements OnInit {
-  public selectedChoirColor;
+export class ChoirSwipeSelectComponent implements OnChanges {
+  public selectedIndex: number;
   public choirColors = ChoirColorsSwipeArray;
+  @Input() public selectedColor: ChoirColor;
+  @Output() public selectedColorChange = new EventEmitter<ChoirColor>();
 
   public constructor() {}
 
-  public ngOnInit(): void {}
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.selectedColor) {
+      this.selectedIndex = indexOfOrUndefined(ChoirColors, this.selectedColor);
+    }
+  }
 
   public getColorName(): string {
-    return this.choirColors[this.selectedChoirColor]?.name;
+    return this.choirColors[this.selectedIndex]?.name;
+  }
+
+  public selectedIndexChange(index: number): void {
+    this.selectedIndex = index;
+    this.selectedColor = ChoirColors[this.selectedIndex];
+    this.selectedColorChange.emit(this.selectedColor);
   }
 }

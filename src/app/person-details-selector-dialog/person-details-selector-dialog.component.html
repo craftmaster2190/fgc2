@@ -1,4 +1,13 @@
+{{ alt }} is speaking during {{ session }} wearing {{ tieColor }} tie.
 <app-person-details-selector
+  [(selectedSession)]="session"
+  [(selectedTie)]="tieColor"
   [alt]="alt"
   [src]="src"
 ></app-person-details-selector>
+
+<div class="close-bar">
+  <button (click)="close()" mat-raised-button>
+    <mat-icon>check</mat-icon>
+  </button>
+</div>
