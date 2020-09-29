@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TempleMapComponent } from './temple-map.component';
 
@@ -6,11 +6,13 @@ describe('TempleMapComponent', () => {
   let component: TempleMapComponent;
   let fixture: ComponentFixture<TempleMapComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [TempleMapComponent],
     }).compileComponents();
-  }));
+
+    (await import('jvectormap-next')).default(jQuery);
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TempleMapComponent);
@@ -19,6 +21,8 @@ describe('TempleMapComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(jQuery).toBeTruthy('jQuery was falsy');
+    expect((jQuery.fn as any).vectorMap).toBeTruthy('vectorMap was falsy');
+    expect(component).toBeTruthy('component was falsy');
   });
 });

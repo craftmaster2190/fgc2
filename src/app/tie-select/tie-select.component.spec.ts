@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TieSelectComponent } from './tie-select.component';
+import { MockComponent } from 'ng-mocks';
+import { SwipeSelectComponent } from '../swipe-select/swipe-select.component';
 
 describe('TieSelectComponent', () => {
   let component: TieSelectComponent;
@@ -8,7 +10,7 @@ describe('TieSelectComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TieSelectComponent],
+      declarations: [TieSelectComponent, MockComponent(SwipeSelectComponent)],
     }).compileComponents();
   }));
 

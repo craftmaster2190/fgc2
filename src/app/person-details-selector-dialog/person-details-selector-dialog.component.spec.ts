@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PersonDetailsSelectorDialogComponent } from './person-details-selector-dialog.component';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MockComponent } from 'ng-mocks';
+import { PersonDetailsSelectorComponent } from '../person-details-selector/person-details-selector.component';
 
 describe('PersonDetailsSelectorDialogComponent', () => {
   let component: PersonDetailsSelectorDialogComponent;
@@ -8,7 +11,11 @@ describe('PersonDetailsSelectorDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PersonDetailsSelectorDialogComponent],
+      declarations: [
+        PersonDetailsSelectorDialogComponent,
+        MockComponent(PersonDetailsSelectorComponent),
+      ],
+      providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }],
     }).compileComponents();
   }));
 

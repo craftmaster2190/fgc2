@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PersonDetailsSelectorComponent } from './person-details-selector.component';
+import { MockComponent } from 'ng-mocks';
+import { SessionSelectorComponent } from '../session-selector/session-selector.component';
+import { TieSelectComponent } from '../tie-select/tie-select.component';
 
 describe('PersonDetailsSelectorComponent', () => {
   let component: PersonDetailsSelectorComponent;
@@ -8,7 +11,11 @@ describe('PersonDetailsSelectorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PersonDetailsSelectorComponent],
+      declarations: [
+        PersonDetailsSelectorComponent,
+        MockComponent(TieSelectComponent),
+        MockComponent(SessionSelectorComponent),
+      ],
     }).compileComponents();
   }));
 

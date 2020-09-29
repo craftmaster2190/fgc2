@@ -34,7 +34,6 @@ export class TempleMapComponent implements OnInit, AfterViewInit {
     this.ngZone.runOutsideAngular(() => {
       jQuery(async () => {
         const mapName = 'world-merc';
-
         const mapData = await import('jvectormap-content/' + mapName);
 
         (jQuery.fn as VectorMapInit).vectorMap(
@@ -46,8 +45,6 @@ export class TempleMapComponent implements OnInit, AfterViewInit {
         Object.keys(mapData.default.paths).map((key) => {
           this.regionNames[key] = mapData.default.paths[key].name;
         });
-
-        console.log('this.regionNames', this.regionNames);
 
         const mapDiv = (jQuery(
           this.mapElement.nativeElement

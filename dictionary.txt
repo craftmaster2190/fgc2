@@ -13,3 +13,5 @@ jvectormap
 Tammudu
 merc
 jquery
+macos
+fantasygc
