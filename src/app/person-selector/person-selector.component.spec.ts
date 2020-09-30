@@ -2,6 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PersonSelectorComponent } from './person-selector.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MockComponent } from 'ng-mocks';
+import { SessionIconComponent } from '../session-icon/session-icon.component';
+import { TieDisplayComponent } from '../tie-display/tie-display.component';
 
 describe('PersonSelectorComponent', () => {
   let component: PersonSelectorComponent;
@@ -9,7 +12,11 @@ describe('PersonSelectorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PersonSelectorComponent],
+      declarations: [
+        PersonSelectorComponent,
+        MockComponent(SessionIconComponent),
+        MockComponent(TieDisplayComponent),
+      ],
       imports: [MatDialogModule],
     }).compileComponents();
   }));

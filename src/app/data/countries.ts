@@ -1,4 +1,3 @@
-import { transpose } from '../../util/objects';
 import { paths as worldPaths } from 'jvectormap-content/world-merc';
 import { paths as usaPaths } from 'jvectormap-content/us-merc';
 

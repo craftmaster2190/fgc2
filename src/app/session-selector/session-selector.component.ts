@@ -15,11 +15,11 @@ export class SessionSelectorComponent implements OnInit {
 
   public constructor() {}
 
-  public ngOnInit(): void {}
-
   public get selectedIndex(): number {
     return indexOfOrUndefined(this.sessions, this.selectedSession);
   }
+
+  public ngOnInit(): void {}
 
   public updateSelectedIndex(value: number): void {
     this.selectedSession = this.sessions[value];

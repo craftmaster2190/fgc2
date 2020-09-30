@@ -4,6 +4,8 @@ import { DemoComponent } from './demo.component';
 import { MockComponent } from 'ng-mocks';
 import { TempleMapComponent } from '../temple-map/temple-map.component';
 import { PersonSelectorComponent } from '../person-selector/person-selector.component';
+import { ChoirSwipeSelectComponent } from '../choir-swipe-select/choir-swipe-select.component';
+import { HymnSelectComponent } from '../hymn-select/hymn-select.component';
 
 describe('DemoComponent', () => {
   let component: DemoComponent;
@@ -15,6 +17,8 @@ describe('DemoComponent', () => {
         DemoComponent,
         MockComponent(PersonSelectorComponent),
         MockComponent(TempleMapComponent),
+        MockComponent(HymnSelectComponent),
+        MockComponent(ChoirSwipeSelectComponent),
       ],
     }).compileComponents();
   }));

@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChoirSwipeSelectComponent } from './choir-swipe-select.component';
+import { MockComponent } from 'ng-mocks';
+import { SwipeSelectComponent } from '../swipe-select/swipe-select.component';
 
 describe('ChoirSwipeSelectComponent', () => {
   let component: ChoirSwipeSelectComponent;
@@ -8,7 +10,10 @@ describe('ChoirSwipeSelectComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ChoirSwipeSelectComponent],
+      declarations: [
+        ChoirSwipeSelectComponent,
+        MockComponent(SwipeSelectComponent),
+      ],
     }).compileComponents();
   }));
 

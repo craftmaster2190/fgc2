@@ -29,6 +29,7 @@
     "@angular/router": "~10.0.14",
     "@ngneat/until-destroy": "^8.0.2",
     "@types/swiper": "^5.4.0",
+    "alphabet-filter": "^1.2.0",
     "change-case": "^4.1.1",
     "depcheck": "^1.2.0",
     "jquery": "^3.5.1",

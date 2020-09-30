@@ -1,0 +1,22 @@
+{{ selectedHymnsSet }}
+{{ selectedHymnsSet.size }}
+<alphabet-filter
+  [data]="hymns"
+  [withTemplate]="true"
+  height="700px"
+  listClass="search-list"
+  placeholder="Select Hymns"
+  propAlphaOrder="name"
+  propsSearch="name"
+>
+  <ng-template let-item>
+    <div class="search-list-item">
+      <mat-checkbox
+        (change)="onCheckBox($event, item)"
+        [checked]="selectedHymnsSet.has(item.name)"
+      >
+        <span>{{ item.name }}</span>
+      </mat-checkbox>
+    </div>
+  </ng-template>
+</alphabet-filter>

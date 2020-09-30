@@ -49,7 +49,7 @@
     "no-var-requires": false,
     "object-literal-key-quotes": [true, "as-needed"],
     "prefer-readonly": true,
-    "quotemark": [true, "single"],
+    "quotemark": [true, "single", "avoid-escape"],
     "semicolon": {
       "options": ["always"]
     },

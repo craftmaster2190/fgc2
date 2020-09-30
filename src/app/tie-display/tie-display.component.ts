@@ -10,12 +10,12 @@ import { indexOfOrUndefined } from '../../util/arrays';
 export class TieDisplayComponent implements OnInit {
   @Input() public tieColor: TieColor;
 
+  public constructor() {}
+
   public get src(): string {
     return TieColorsSwipeArray[indexOfOrUndefined(TieColors, this.tieColor)]
       ?.src;
   }
-
-  public constructor() {}
 
   public ngOnInit(): void {}
 }

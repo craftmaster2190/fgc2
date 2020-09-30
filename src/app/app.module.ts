@@ -24,6 +24,9 @@ import { HomeComponent } from './home/home.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { TieDisplayComponent } from './tie-display/tie-display.component';
+import { AlphabetFilterModule } from 'alphabet-filter';
+import { HymnSelectComponent } from './hymn-select/hymn-select.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -55,6 +58,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     TempleMapComponent,
     HomeComponent,
     TieDisplayComponent,
+    HymnSelectComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +68,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
+    AlphabetFilterModule,
+    MatCheckboxModule,
   ],
   providers: [
     {

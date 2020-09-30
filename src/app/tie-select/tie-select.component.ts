@@ -1,10 +1,9 @@
 import {
   Component,
-  Input,
-  OnInit,
-  Output,
   EventEmitter,
+  Input,
   OnChanges,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import { TieColor, TieColors, TieColorsSwipeArray } from '../data/tie-color';

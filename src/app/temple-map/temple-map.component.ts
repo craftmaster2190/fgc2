@@ -34,15 +34,15 @@ const MAX_REGIONS = 5;
 })
 export class TempleMapComponent implements OnChanges, AfterViewInit {
   @ViewChild('map') public mapElement: ElementRef;
-  private mapObject;
-  private selectedRegions = [];
-  private readonly regionKeys2RegionNames: StringMap = {};
-  private readonly regionNames2RegionKeys: StringMap = {};
   @Input() public mode: 'world' | 'usa';
   @Input() public selectedRegionNames: Array<string>;
   @Output() public selectedRegionNamesChange = new EventEmitter<
     Array<string>
   >();
+  private mapObject;
+  private selectedRegions = [];
+  private readonly regionKeys2RegionNames: StringMap = {};
+  private readonly regionNames2RegionKeys: StringMap = {};
   private readonly initComplete = new ReplaySubject<null>(1);
   private readonly onChangeSelectedRegionNames = new Subject<Array<string>>();
   private readonly onChangeSelectedRegionsNamesSubscription = this.onChangeSelectedRegionNames
@@ -134,16 +134,6 @@ export class TempleMapComponent implements OnChanges, AfterViewInit {
     });
   }
 
-  private removeAmerica(regions: Array<string>): Array<string> {
-    const index = regions.findIndex((regionCode) => regionCode === 'US');
-    if (index > -1) {
-      regions.splice(index, 1);
-      this.mapObject.clearSelectedRegions();
-      this.mapObject.setSelectedRegions(regions);
-    }
-    return regions;
-  }
-
   public inputUpdateSelectedRegions(regionNames: Array<string>): void {
     this.ngZone.run(() => {
       this.selectedRegions = regionNames.map(
@@ -180,5 +170,15 @@ export class TempleMapComponent implements OnChanges, AfterViewInit {
         (regionKey) => this.regionKeys2RegionNames[regionKey]
       )
     );
+  }
+
+  private removeAmerica(regions: Array<string>): Array<string> {
+    const index = regions.findIndex((regionCode) => regionCode === 'US');
+    if (index > -1) {
+      regions.splice(index, 1);
+      this.mapObject.clearSelectedRegions();
+      this.mapObject.setSelectedRegions(regions);
+    }
+    return regions;
   }
 }
