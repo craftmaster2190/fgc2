@@ -27,6 +27,7 @@ import { TieDisplayComponent } from './tie-display/tie-display.component';
 import { AlphabetFilterModule } from 'alphabet-filter';
 import { HymnSelectComponent } from './hymn-select/hymn-select.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CountdownComponent } from './countdown/countdown.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -59,6 +60,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     HomeComponent,
     TieDisplayComponent,
     HymnSelectComponent,
+    CountdownComponent,
   ],
   imports: [
     BrowserModule,
