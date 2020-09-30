@@ -6,6 +6,7 @@ import {
   Input,
   NgZone,
   OnChanges,
+  OnDestroy,
   Output,
   SimpleChanges,
   ViewChild,
@@ -32,7 +33,7 @@ const MAX_REGIONS = 5;
   templateUrl: './temple-map.component.html',
   styleUrls: ['./temple-map.component.scss'],
 })
-export class TempleMapComponent implements OnChanges, AfterViewInit {
+export class TempleMapComponent implements OnChanges, AfterViewInit, OnDestroy {
   @ViewChild('map') public mapElement: ElementRef;
   @Input() public mode: 'world' | 'usa';
   @Input() public selectedRegionNames: Array<string>;
@@ -63,6 +64,10 @@ export class TempleMapComponent implements OnChanges, AfterViewInit {
     if (changes.selectedRegionNames) {
       this.onChangeSelectedRegionNames.next(this.selectedRegionNames);
     }
+  }
+
+  public ngOnDestroy(): void {
+    this.mapObject.destroy();
   }
 
   public ngAfterViewInit(): void {

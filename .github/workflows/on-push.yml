@@ -32,7 +32,9 @@ jobs:
         run: sed -i '' "s|XXX_SENTRY_DSN_XXX|${{ secrets.SENTRY_DSN }}|" src/index.html
 
       - name: Npm Build
-        run: npm run build
+        run: |
+          npm run clean
+          npm run build:ci
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v1
