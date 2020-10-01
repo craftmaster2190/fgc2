@@ -8,8 +8,16 @@ export async function handler(
   event: APIGatewayEvent,
   context: Context
 ): Promise<APIGatewayProxyResult> {
-  const answers = await new DB().getAnswers(getUser(event).userId);
-  await new WS().sendToClient(event, { type: 'answers', answers });
+  const { answers } = await new DB().getAnswers(getUser(event).userId);
+  console.log(answers);
+
+  let answersObj = answers;
+  try {
+    answersObj = JSON.parse(answers);
+  } catch (e) {
+    console.error('Unable to JSON parse', e);
+  }
+  await new WS().sendToClient(event, { type: 'answers', answers: answersObj });
 
   return responseBody(event);
 }

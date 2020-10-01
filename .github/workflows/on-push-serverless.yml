@@ -39,9 +39,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: us-west-1
 
-      - name: Setup Sentry
-        if: github.ref == 'refs/heads/master'
-        run: sed -i '' "s|XXX_SENTRY_DSN_XXX|${{ secrets.SENTRY_DSN }}|" src/lambda/handler.ts
+#      - name: Setup Sentry
+#        if: github.ref == 'refs/heads/master'
+#        run: sed -i '' "s|XXX_SENTRY_DSN_XXX|${{ secrets.SENTRY_DSN }}|" src/lambda/handler.ts
 
       - name: Sls Deploy
         if: github.ref == 'refs/heads/master'

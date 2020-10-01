@@ -28,8 +28,8 @@ jobs:
       - name: Npm Test
         run: npm run test:ci
 
-      - name: Setup Sentry
-        run: sed -i '' "s|XXX_SENTRY_DSN_XXX|${{ secrets.SENTRY_DSN }}|" src/index.html
+#      - name: Setup Sentry
+#        run: sed -i '' "s|XXX_SENTRY_DSN_XXX|${{ secrets.SENTRY_DSN }}|" src/index.html
 
       - name: Npm Build
         run: |

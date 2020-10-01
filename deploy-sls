@@ -1,0 +1,10 @@
+#!/bin/bash
+
+function main() {
+    cd src/lambda || exit 1
+    sls deploy
+}
+
+if [[ $(git rev-parse --abbrev-ref HEAD) = 'master' ]]; then
+    main
+fi

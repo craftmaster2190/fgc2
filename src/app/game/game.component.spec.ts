@@ -8,6 +8,8 @@ import { ChoirSwipeSelectComponent } from '../choir-swipe-select/choir-swipe-sel
 import { HymnSelectComponent } from '../hymn-select/hymn-select.component';
 import { TempleMapComponent } from '../temple-map/temple-map.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ServerBusService } from '../websocket/server-bus.service';
+import { of } from 'rxjs';
 
 describe('GameComponent', () => {
   let component: GameComponent;
@@ -21,6 +23,16 @@ describe('GameComponent', () => {
         MockComponent(ChoirSwipeSelectComponent),
         MockComponent(HymnSelectComponent),
         MockComponent(TempleMapComponent),
+      ],
+      providers: [
+        {
+          provide: ServerBusService,
+          useValue: {
+            connect: () => of(),
+            send: () => void 0,
+            disconnect: () => void 0,
+          },
+        },
       ],
       imports: [MatExpansionModule, NoopAnimationsModule],
     }).compileComponents();
