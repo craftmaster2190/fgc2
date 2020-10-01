@@ -1,11 +1,6 @@
-<div class="fgc-flex-center">
+<div (click)="openDialog()" class="fgc-flex-center">
   <div style="position: relative">
-    <img
-      (click)="openDialog()"
-      [alt]="alt"
-      [src]="src"
-      class="click person-image"
-    />
+    <img [alt]="alt" [src]="src" class="click person-image">
 
     <app-session-icon [session]="session"></app-session-icon>
     <app-tie-display [tieColor]="tieColor"></app-tie-display>

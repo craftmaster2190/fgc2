@@ -118,15 +118,15 @@
       <mat-panel-description>Where will new temples be built?</mat-panel-description>
     </mat-expansion-panel-header>
     <div class="hymns">
-      <h1>Which countries will get new temples? (Not including the U.S.A.)</h1>
-      <app-temple-map
-        [(selectedRegionNames)]="gameData.answers.newTemples.world"
-        mode="world"
-      ></app-temple-map>
       <h1>Which states of the U.S.A will get new temples?</h1>
       <app-temple-map
         [(selectedRegionNames)]="gameData.answers.newTemples.usa"
         mode="usa"
+      ></app-temple-map>
+      <h1>Which countries will get new temples? (Not including the U.S.A.)</h1>
+      <app-temple-map
+        [(selectedRegionNames)]="gameData.answers.newTemples.world"
+        mode="world"
       ></app-temple-map>
     </div>
   </mat-expansion-panel>
