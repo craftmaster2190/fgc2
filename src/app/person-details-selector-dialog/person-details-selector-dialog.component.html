@@ -1,10 +1,28 @@
-{{ alt }} is speaking during {{ session }} wearing {{ tieColor }} tie.
+<div class="fgc-flex-center">
+  <div>
+    I think that
+    <b>{{ altName }}</b>
+  </div>
+  <div>
+    will speak during the
+    <b>{{ sessionName }}</b>
+  </div>
+  <div>
+    and will wear a
+    <b>{{ tieColorName }}</b> tie.
+  </div>
+</div>
+
 <app-person-details-selector
+  (selectedSessionChange)="triggerUpdateNames()"
+  (selectedTieChange)="triggerUpdateNames()"
   [(selectedSession)]="session"
   [(selectedTie)]="tieColor"
   [alt]="alt"
   [src]="src"
 ></app-person-details-selector>
+
+<div class="instructions">Swipe left or right</div>
 
 <div class="close-bar">
   <button (click)="close()" mat-raised-button>

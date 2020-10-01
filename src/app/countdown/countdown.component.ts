@@ -3,6 +3,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TimeDisabledService } from './time-disabled.service';
 import { timer } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { capitalCase } from 'change-case';
 
 @UntilDestroy()
 @Component({
@@ -13,6 +14,13 @@ import { tap } from 'rxjs/operators';
 export class CountdownComponent implements OnInit {
   public timeUntilText;
   public nextText;
+
+  private padNumber(num: number): string {
+    if (num < 10) {
+      return '0' + String(num);
+    }
+    return String(num);
+  }
 
   public constructor(timeDisabledService: TimeDisabledService) {
     timer(0, 1000)
@@ -28,24 +36,24 @@ export class CountdownComponent implements OnInit {
 
           const currentSession = timeDisabledService.getCurrentSession();
           if (currentSession) {
-            this.nextText = 'until end of ' + currentSession;
+            this.nextText = 'until end of ' + capitalCase(currentSession);
           } else {
             const nextSession = timeDisabledService.getNextSession();
             if (nextSession) {
-              this.nextText = 'until start of ' + nextSession;
+              this.nextText = 'until start of ' + capitalCase(nextSession);
             }
           }
 
-          const days = timeUntil.days();
-          const hours = timeUntil.hours();
+          const hours = timeUntil.hours() + timeUntil.days() * 24;
           const minutes = timeUntil.minutes();
           const seconds = timeUntil.seconds();
 
-          this.timeUntilText = '';
-          if (days) {
-            this.timeUntilText = days + ' Days ';
-          }
-          this.timeUntilText += hours + ':' + minutes + ':' + seconds;
+          this.timeUntilText =
+            this.padNumber(hours) +
+            ':' +
+            this.padNumber(minutes) +
+            ':' +
+            this.padNumber(seconds);
         })
       )
       .subscribe();

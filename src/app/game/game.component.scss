@@ -1,0 +1,30 @@
+.first-presidency-counselors {
+  display: flex;
+  flex-direction: column;
+  place-content: center center;
+  place-items: center center;
+}
+
+@media (screen and min-width: 300px) {
+  .first-presidency-counselors {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+}
+@media (screen and min-width: 600px) {
+  .first-presidency-counselors {
+    gap: 98px;
+  }
+}
+
+@media (screen and min-width: 300px) {
+  .apostles {
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center center;
+    place-items: center center;
+    flex-direction: row;
+    gap: 24px;
+  }
+}

@@ -1,11 +1,32 @@
 :host {
-  display: block;
+  display: flex;
   position: relative;
-  height: 500px;
+  place-content: center center;
+  place-items: center center;
+}
+
+:host,
+.map-container {
+  height: 200px;
+}
+
+@media (screen and min-width: 481px) {
+  :host,
+  .map-container {
+    height: 350px;
+  }
+}
+
+@media (screen and min-width: 681px) {
+  :host,
+  .map-container {
+    height: 500px;
+  }
 }
 
 .map-container {
-  height: 500px;
+  width: 80%;
+  margin: 0 auto;
 
   .map-holder {
     height: 100%;

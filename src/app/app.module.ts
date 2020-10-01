@@ -30,6 +30,7 @@ import { CountdownComponent } from './countdown/countdown.component';
 import { GameComponent } from './game/game.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { PersonSelectorContainerComponent } from './person-selector-container/person-selector-container.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -64,6 +65,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     CountdownComponent,
     GameComponent,
     PersonSelectorContainerComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

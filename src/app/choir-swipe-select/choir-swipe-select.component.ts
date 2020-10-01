@@ -25,7 +25,7 @@ const choirColorInit = (color, suffix) => ({
 })
 export class ChoirSwipeSelectComponent implements OnChanges {
   public selectedIndex: number;
-  public choirColors = ChoirColorsSwipeArray;
+  public readonly choirColors = ChoirColorsSwipeArray;
   @Input() public selectedColor: ChoirColor;
   @Output() public selectedColorChange = new EventEmitter<ChoirColor>();
 

@@ -1,29 +1,32 @@
-<div>Welcome to</div>
-<div>Fantasy General Conference</div>
-<div>October 2020</div>
+<div style="padding: 4px 12px">
+  <div class="fgc-flex-center">Welcome!</div>
 
-<div>How to play:</div>
-<div>
-  Make a guess of you think will be speaking, which session and what color tie
-  he will be wearing. (if applicable)
+  <div>How to play:</div>
+  <div>
+    Tap a section below to make a guess of who you think will be speaking, which
+    session, what color tie he will be wearing (if applicable) and so on.
+  </div>
 </div>
 
 <mat-accordion [multi]="false">
   <mat-expansion-panel [expanded]="true">
     <mat-expansion-panel-header>
       <mat-panel-title>First Presidency</mat-panel-title>
-      <mat-panel-description>Who is speaking?</mat-panel-description>
+      <mat-panel-description>Who will speak?</mat-panel-description>
     </mat-expansion-panel-header>
     <div class="first-presidency">
+      <div class="instructions">Tap a face to guess</div>
       <app-person-selector-container
         [person]="gameData.answers.firstPresidency.russellMNelson"
       ></app-person-selector-container>
-      <app-person-selector-container
-        [person]="gameData.answers.firstPresidency.henryBEyring"
-      ></app-person-selector-container>
-      <app-person-selector-container
-        [person]="gameData.answers.firstPresidency.dallinHOaks"
-      ></app-person-selector-container>
+      <div class="first-presidency-counselors">
+        <app-person-selector-container
+          [person]="gameData.answers.firstPresidency.dallinHOaks"
+        ></app-person-selector-container>
+        <app-person-selector-container
+          [person]="gameData.answers.firstPresidency.henryBEyring"
+        ></app-person-selector-container>
+      </div>
     </div>
   </mat-expansion-panel>
 
@@ -48,7 +51,7 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>Apostles</mat-panel-title>
-      <mat-panel-description>Who is speaking?</mat-panel-description>
+      <mat-panel-description>Who will speak?</mat-panel-description>
     </mat-expansion-panel-header>
     <div class="apostles">
       <app-person-selector-container
@@ -93,12 +96,21 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>Choir Colors</mat-panel-title>
-      <mat-panel-description>What will the choir be wearing?</mat-panel-description>
+      <mat-panel-description
+        >What will the choir be wearing?</mat-panel-description
+      >
     </mat-expansion-panel-header>
     <div class="choir-colors">
-      <app-choir-swipe-select
-        [(selectedColor)]="gameData.answers.choirColors.SaturdayMorningSession"
-      ></app-choir-swipe-select>
+      <div class="instructions">Swipe left or right</div>
+      <ng-template [ngForOf]="sessions" let-session ngFor>
+        <div class="fgc-flex-center">
+          What color will the choir be wearing during
+          {{ sessionNames[session] }}
+        </div>
+        <app-choir-swipe-select
+          [(selectedColor)]="gameData.answers.choirColors[session]"
+        ></app-choir-swipe-select>
+      </ng-template>
     </div>
   </mat-expansion-panel>
 
@@ -108,26 +120,43 @@
       <mat-panel-description>What will be sung?</mat-panel-description>
     </mat-expansion-panel-header>
     <div class="hymns">
-      <app-hymn-select [(selectedHymns)]="gameData.answers.selectedHymns"></app-hymn-select>
+      <div>
+        I think the hymns to be sung will be:
+        {{ gameData.answers.selectedHymns?.join(", ") }}
+      </div>
+      <app-hymn-select
+        [(selectedHymns)]="gameData.answers.selectedHymns"
+      ></app-hymn-select>
     </div>
   </mat-expansion-panel>
 
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>Temples</mat-panel-title>
-      <mat-panel-description>Where will new temples be built?</mat-panel-description>
+      <mat-panel-description
+        >Where will new temples be built?</mat-panel-description
+      >
     </mat-expansion-panel-header>
-    <div class="hymns">
-      <h1>Which states of the U.S.A will get new temples?</h1>
+    <div class="temples">
+      <div class="instructions">
+        Pinch or spread to zoom in or out. Tap to select.
+      </div>
+
+      <div>Which states of the U.S.A will get new temples?</div>
       <app-temple-map
         [(selectedRegionNames)]="gameData.answers.newTemples.usa"
         mode="usa"
       ></app-temple-map>
-      <h1>Which countries will get new temples? (Not including the U.S.A.)</h1>
+      <div>{{ gameData.answers.newTemples.usa?.join(", ") }}</div>
+
+      <div>
+        Which countries will get new temples? (Not including the U.S.A.)
+      </div>
       <app-temple-map
         [(selectedRegionNames)]="gameData.answers.newTemples.world"
         mode="world"
       ></app-temple-map>
+      <div>{{ gameData.answers.newTemples.world?.join(", ") }}</div>
     </div>
   </mat-expansion-panel>
 </mat-accordion>

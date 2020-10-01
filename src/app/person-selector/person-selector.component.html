@@ -1,10 +1,7 @@
 <div (click)="openDialog()" class="fgc-flex-center">
   <div style="position: relative">
-    <img [alt]="alt" [src]="src" class="click person-image">
-
+    <img [alt]="alt" [src]="src" class="click person-image" />
     <app-session-icon [session]="session"></app-session-icon>
     <app-tie-display [tieColor]="tieColor"></app-tie-display>
   </div>
-  {{ tieColor }}
-  {{ session }}
 </div>

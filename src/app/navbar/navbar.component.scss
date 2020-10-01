@@ -1,0 +1,14 @@
+:host {
+  font-family: "Great Vibes", cursive;
+  font-size: 36px;
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: calc(100% - 16px);
+  line-height: 56px;
+  background: white;
+  border-bottom: 1px grey solid;
+  padding: 4px 8px 0 8px;
+}

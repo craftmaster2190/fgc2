@@ -1,4 +1,5 @@
 import { SwipeInputArray } from '../swipe-select/swipe-select.component';
+import { capitalCase } from 'change-case';
 
 export enum TieColor {
   'brown' = 'brown',
@@ -7,7 +8,7 @@ export enum TieColor {
   'purple' = 'purple',
   'black' = 'black',
   'blue' = 'blue',
-  'sky' = 'sky',
+  'skyBlue' = 'sky-blue',
   'green' = 'green',
   'orange' = 'orange',
   'yellow' = 'yellow',
@@ -20,15 +21,13 @@ export const TieColors = [
   TieColor.purple,
   TieColor.black,
   TieColor.blue,
-  TieColor.sky,
+  TieColor.skyBlue,
   TieColor.green,
   TieColor.orange,
   TieColor.yellow,
 ];
 
-export const TieColorsSwipeArray: SwipeInputArray = TieColors.map(
-  (tieColor) => TieColor[tieColor]
-).map((color) => ({
+export const TieColorsSwipeArray: SwipeInputArray = TieColors.map((color) => ({
   src: 'assets/ties/' + color + '-tie.jpg',
-  name: color,
+  name: capitalCase(color),
 }));

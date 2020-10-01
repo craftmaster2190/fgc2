@@ -1,4 +1,5 @@
 import { SwipeInputArray } from '../swipe-select/swipe-select.component';
+import { capitalCase } from 'change-case';
 
 export enum ChoirColor {
   'black' = 'black',
@@ -24,20 +25,23 @@ export const ChoirColors = [
   ChoirColor.blueSky,
   ChoirColor.blueTeal,
   ChoirColor.blue,
-  ChoirColor.pastelBright,
-  ChoirColor.pastelDark,
+  // ChoirColor.pastelBright,
+  // ChoirColor.pastelDark,
   ChoirColor.pastelNeutral,
   ChoirColor.pastelPinkValentines,
   ChoirColor.purpleLight,
-  ChoirColor.purpleNeutral,
+  // ChoirColor.purpleNeutral,
   ChoirColor.purple,
   ChoirColor.redBright,
-  ChoirColor.redDark,
+  // ChoirColor.redDark,
   ChoirColor.redMauve,
   ChoirColor.redPink,
   ChoirColor.white,
 ];
 
 export const ChoirColorsSwipeArray: SwipeInputArray = ChoirColors.map(
-  (color) => ({ src: 'assets/choir/' + color + '.png', name: color })
+  (color) => ({
+    src: 'assets/choir/' + color + '.png',
+    name: capitalCase(color),
+  })
 );

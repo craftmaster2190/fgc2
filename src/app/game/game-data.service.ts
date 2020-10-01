@@ -200,8 +200,8 @@ export class GameDataService {
       [Session.SaturdayMorningSession]: randomElement(ChoirColors),
       [Session.SaturdayAfternoonSession]: randomElement(ChoirColors),
       [Session.PriesthoodSession]: randomElement(ChoirColors),
-      [Session.SaturdayMorningSession]: randomElement(ChoirColors),
-      [Session.SaturdayMorningSession]: randomElement(ChoirColors),
+      [Session.SundayMorningSession]: randomElement(ChoirColors),
+      [Session.SundayAfternoonSession]: randomElement(ChoirColors),
     },
     selectedHymns: [] as Array<string>,
     newTemples: {
