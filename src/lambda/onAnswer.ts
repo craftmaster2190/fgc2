@@ -1,17 +1,14 @@
 import { APIGatewayEvent, APIGatewayProxyResult, Context } from 'aws-lambda';
+import { DB } from './domain/db';
+import { getUser } from './domain/user';
+import { bodyOf } from './domain/bodyOf';
+import { responseBody } from './domain/responseBody';
 
 export async function handler(
   event: APIGatewayEvent,
   context: Context
 ): Promise<APIGatewayProxyResult> {
-  return {
-    statusCode: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-    },
-    body: JSON.stringify({
-      message: 'Go Typescript',
-      input: event,
-    }),
-  };
+  await new DB().putAnswers(getUser(event).userId, bodyOf(event).answers);
+
+  return responseBody(event);
 }

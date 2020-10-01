@@ -2,7 +2,7 @@
   "name": "fgc2-lambda",
   "version": "1.0.0",
   "description": "",
-  "main": "handler.ts",
+  "main": "onDefault.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.17",
+    "@types/aws-sdk": "^2.7.0",
     "@types/node": "^10.12.18",
     "@types/serverless": "^1.72.5",
     "fork-ts-checker-webpack-plugin": "^3.0.1",

@@ -31,6 +31,17 @@ provider:
   logs:
     websocket: true
 
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:*:*:table/*"
+
 functions:
   connectHandler:
     handler: onConnect.handler
@@ -47,8 +58,13 @@ functions:
     events:
       - websocket:
           route: $default
-  actionHandler:
+  onAnswerHandler:
     handler: onAnswer.handler
     events:
       - websocket:
           route: answer
+  onInitHandler:
+    handler: onInit.handler
+    events:
+      - websocket:
+          route: init

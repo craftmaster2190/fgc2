@@ -1,16 +1,15 @@
 import { APIGatewayEvent, APIGatewayProxyResult, Context } from 'aws-lambda';
-import { getUser } from './domain/user';
 import { DB } from './domain/db';
+import { WS } from './domain/ws';
+import { getUser } from './domain/user';
 import { responseBody } from './domain/responseBody';
 
 export async function handler(
   event: APIGatewayEvent,
   context: Context
 ): Promise<APIGatewayProxyResult> {
-  await new DB().addConnection(
-    event.requestContext.connectionId,
-    getUser(event).userId
-  );
+  const answers = await new DB().getAnswers(getUser(event).userId);
+  await new WS().sendToClient(event, { type: 'answers', answers });
 
   return responseBody(event);
 }
