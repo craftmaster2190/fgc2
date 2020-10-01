@@ -67,7 +67,7 @@ export class TempleMapComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.mapObject.destroy();
+    this.mapObject?.destroy?.();
   }
 
   public ngAfterViewInit(): void {
