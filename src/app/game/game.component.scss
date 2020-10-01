@@ -12,6 +12,7 @@
     gap: 24px;
   }
 }
+
 @media (screen and min-width: 600px) {
   .first-presidency-counselors {
     gap: 98px;
@@ -26,6 +27,12 @@
     place-items: center center;
     flex-direction: row;
     gap: 24px;
-    max-width: 800px;
+  }
+}
+
+@media (screen and min-width: 600px) {
+  .apostles {
+    gap: 48px;
+    max-width: 700px;
   }
 }
