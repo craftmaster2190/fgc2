@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DemoComponent } from './demo/demo.component';
 import {
   SWIPER_CONFIG,
   SwiperConfigInterface,
@@ -50,7 +49,6 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 @NgModule({
   declarations: [
     AppComponent,
-    DemoComponent,
     SwipeSelectComponent,
     ChoirSwipeSelectComponent,
     SessionIconComponent,

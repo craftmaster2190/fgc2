@@ -26,10 +26,6 @@ export class TimeDisabledService {
 
   public constructor(private readonly nowService: NowService) {}
 
-  private getMomentForSession(session: Session): moment.Moment {
-    return this.sessionStarts[session].clone();
-  }
-
   public getCurrentSession(now = this.nowService.now()): Session {
     return Sessions.find(
       (session) =>
@@ -74,5 +70,9 @@ export class TimeDisabledService {
 
     // Between sessions
     return moment.duration(this.getMomentForSession(nextSession).diff(now));
+  }
+
+  private getMomentForSession(session: Session): moment.Moment {
+    return this.sessionStarts[session].clone();
   }
 }
