@@ -9,9 +9,22 @@ service: fgc-lambda
 
 frameworkVersion: '2'
 
+custom:
+  webpack:
+    webpackConfig: './webpack.config.js'
+    includeModules: true
+
+plugins:
+  - serverless-webpack
+
 provider:
   name: aws
   runtime: nodejs12.x
+  apiGateway:
+    minimumCompressionSize: 1024
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1'
+
   stage: production
   websocketsApiName: fgc-lambda-websockets-api
   websocketsApiRouteSelectionExpression: $request.body.action
@@ -19,20 +32,23 @@ provider:
     websocket: true
 
 functions:
-  connectionHandler:
-    handler: handler.handler
+  connectHandler:
+    handler: onConnect.handler
     events:
       - websocket:
           route: $connect
+  disconnectHandler:
+    handler: onDisconnect.handler
+    events:
       - websocket:
           route: $disconnect
   defaultHandler:
-    handler: handler.handler
+    handler: onDefault.handler
     events:
       - websocket:
           route: $default
   actionHandler:
-    handler: handler.handler
+    handler: onAnswer.handler
     events:
       - websocket:
           route: answer

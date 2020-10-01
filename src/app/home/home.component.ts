@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServerBusService } from '../websocket/server-bus.service';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  public constructor() {}
+  public constructor(private readonly serverBus: ServerBusService) {
+    this.serverBus.connect().subscribe();
+    this.serverBus.send({ type: 'test' });
+    this.serverBus.send({ action: 'answer' });
+  }
 
   public ngOnInit(): void {}
 }
