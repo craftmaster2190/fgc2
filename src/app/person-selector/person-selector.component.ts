@@ -6,7 +6,10 @@ import {
 } from '../person-details-selector-dialog/person-details-selector-dialog.component';
 import { Session } from '../data/session';
 import { TieColor } from '../data/tie-color';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { filter, tap } from 'rxjs/operators';
 
+@UntilDestroy()
 @Component({
   selector: 'app-person-selector',
   templateUrl: './person-selector.component.html',
@@ -36,11 +39,16 @@ export class PersonSelectorComponent implements OnInit {
         width: '500px',
       })
       .afterClosed()
-      .subscribe((result: PersonDetailsSelectorDialogResult) => {
-        this.session = result.session;
-        this.sessionChange.emit(this.session);
-        this.tieColor = result.tieColor;
-        this.tieColorChange.emit(this.tieColor);
-      });
+      .pipe(
+        untilDestroyed(this),
+        filter((result) => !!result),
+        tap((result: PersonDetailsSelectorDialogResult) => {
+          this.session = result.session;
+          this.sessionChange.emit(this.session);
+          this.tieColor = result.tieColor;
+          this.tieColorChange.emit(this.tieColor);
+        })
+      )
+      .subscribe();
   }
 }

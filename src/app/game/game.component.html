@@ -1,0 +1,139 @@
+<div>Welcome to</div>
+<div>Fantasy General Conference</div>
+<div>October 2020</div>
+
+<div>How to play:</div>
+<div>
+  Make a guess of you think will be speaking, which session and what color tie
+  he will be wearing. (if applicable)
+</div>
+
+<mat-accordion [multi]="false">
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title> First Presidency </mat-panel-title>
+      <mat-panel-description> Who is speaking? </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="first-presidency">
+      <app-person-selector-container
+        [person]="gameData.answers.firstPresidency.russellMNelson"
+      ></app-person-selector-container>
+      <app-person-selector-container
+        [person]="gameData.answers.firstPresidency.henryBEyring"
+      ></app-person-selector-container>
+      <app-person-selector-container
+        [person]="gameData.answers.firstPresidency.dallinHOaks"
+      ></app-person-selector-container>
+    </div>
+  </mat-expansion-panel>
+
+  <!--  <mat-expansion-panel>-->
+  <!--    <mat-expansion-panel-header>-->
+  <!--      <mat-panel-title> First Presidency </mat-panel-title>-->
+  <!--      <mat-panel-description> Who is conducting? </mat-panel-description>-->
+  <!--    </mat-expansion-panel-header>-->
+  <!--    <div class="first-presidency">-->
+  <!--      <app-person-selector-container-->
+  <!--        [person]="gameData.answers.firstPresidency.russellMNelson"-->
+  <!--      ></app-person-selector-container>-->
+  <!--      <app-person-selector-container-->
+  <!--        [person]="gameData.answers.firstPresidency.henryBEyring"-->
+  <!--      ></app-person-selector-container>-->
+  <!--      <app-person-selector-container-->
+  <!--        [person]="gameData.answers.firstPresidency.dallinHOaks"-->
+  <!--      ></app-person-selector-container>-->
+  <!--    </div>-->
+  <!--  </mat-expansion-panel>-->
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Apostles</mat-panel-title>
+      <mat-panel-description> Who is speaking? </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="apostles">
+      <app-person-selector-container
+        [person]="gameData.answers.apostles.mRussellBallard"
+      ></app-person-selector-container>
+      <app-person-selector-container
+        [person]="gameData.answers.apostles.jeffreyRHolland"
+      ></app-person-selector-container>
+      <app-person-selector-container
+        [person]="gameData.answers.apostles.dieterFUchtdorf"
+      ></app-person-selector-container>
+      <app-person-selector-container
+        [person]="gameData.answers.apostles.davidABednar"
+      ></app-person-selector-container>
+      <app-person-selector-container
+        [person]="gameData.answers.apostles.quentinLCook"
+      ></app-person-selector-container>
+      <app-person-selector-container
+        [person]="gameData.answers.apostles.dToddChristofferson"
+      ></app-person-selector-container>
+      <app-person-selector-container
+        [person]="gameData.answers.apostles.neilLAndersen"
+      ></app-person-selector-container>
+      <app-person-selector-container
+        [person]="gameData.answers.apostles.ronaldARasband"
+      ></app-person-selector-container>
+      <app-person-selector-container
+        [person]="gameData.answers.apostles.garyEStevenson"
+      ></app-person-selector-container>
+      <app-person-selector-container
+        [person]="gameData.answers.apostles.daleGRenlund"
+      ></app-person-selector-container>
+      <app-person-selector-container
+        [person]="gameData.answers.apostles.gerritWGong"
+      ></app-person-selector-container>
+      <app-person-selector-container
+        [person]="gameData.answers.apostles.ulissesSoarses"
+      ></app-person-selector-container>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Choir Colors </mat-panel-title>
+      <mat-panel-description>
+        What will the choir be wearing?
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="choir-colors">
+      <app-choir-swipe-select
+        [(selectedColor)]="gameData.answers.choirColors.SaturdayMorningSession"
+      ></app-choir-swipe-select>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Hymns </mat-panel-title>
+      <mat-panel-description> What will be sung? </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="hymns">
+      <app-hymn-select
+        [(selectedHymns)]="gameData.answers.selectedHymns"
+      ></app-hymn-select>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Temples </mat-panel-title>
+      <mat-panel-description>
+        Where will new temples be built?
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="hymns">
+      <h1>Which countries will get new temples? (Not including the U.S.A.)</h1>
+      <app-temple-map
+        mode="world"
+        [(selectedRegionNames)]="gameData.answers.newTemples.world"
+      ></app-temple-map>
+      <h1>Which states of the U.S.A will get new temples?</h1>
+      <app-temple-map
+        mode="usa"
+        [(selectedRegionNames)]="gameData.answers.newTemples.usa"
+      ></app-temple-map>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -38,3 +38,8 @@ export function englishAndJoin<T>(array: Array<T>): string {
     array[array.length - 1]
   );
 }
+
+export function randomElement<T>(array: Array<T>): T {
+  const randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
+}

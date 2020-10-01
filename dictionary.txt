@@ -16,3 +16,16 @@ jquery
 macos
 fantasygc
 ngneat
+jspm
+Uchtdorf
+ulisses
+Soarses
+Bednar
+Renlund
+Teixeira
+Nielson
+Godoy
+Causse
+Aburto
+Eubank
+Lund

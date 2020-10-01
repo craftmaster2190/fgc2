@@ -1,0 +1,38 @@
+# Welcome to serverless. Read the docs
+# https://serverless.com/framework/docs/
+
+# Serverless.yml is the configuration the CLI
+# uses to deploy your code to your provider of choice
+
+# The `service` block is the name of the service
+service: fgc-lambda
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: production
+  websocketsApiName: fgc-lambda-websockets-api
+  websocketsApiRouteSelectionExpression: $request.body.action
+  logs:
+    websocket: true
+
+functions:
+  connectionHandler:
+    handler: handler.handler
+    events:
+      - websocket:
+          route: $connect
+      - websocket:
+          route: $disconnect
+  defaultHandler:
+    handler: handler.handler
+    events:
+      - websocket:
+          route: $default
+  actionHandler:
+    handler: handler.handler
+    events:
+      - websocket:
+          route: answer

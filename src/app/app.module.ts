@@ -28,6 +28,9 @@ import { AlphabetFilterModule } from 'alphabet-filter';
 import { HymnSelectComponent } from './hymn-select/hymn-select.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CountdownComponent } from './countdown/countdown.component';
+import { GameComponent } from './game/game.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { PersonSelectorContainerComponent } from './person-selector-container/person-selector-container.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -61,6 +64,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     TieDisplayComponent,
     HymnSelectComponent,
     CountdownComponent,
+    GameComponent,
+    PersonSelectorContainerComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +77,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatIconModule,
     AlphabetFilterModule,
     MatCheckboxModule,
+    MatExpansionModule,
   ],
   providers: [
     {
