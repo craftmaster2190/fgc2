@@ -7,12 +7,12 @@ import { responseBody } from './domain/responseBody';
 export async function handler(
   event: APIGatewayEvent
 ): Promise<APIGatewayProxyResult> {
-  const { answers } = await new DB().getAnswers(getUser(event).userId);
-  console.log(answers);
+  const response = await new DB().getAnswers(getUser(event).userId);
+  console.log(response);
 
-  let answersObj = answers;
+  let answersObj = response?.answers ?? '{}';
   try {
-    answersObj = JSON.parse(answers);
+    answersObj = JSON.parse(answersObj);
   } catch (e) {
     console.error('Unable to JSON parse', e);
   }

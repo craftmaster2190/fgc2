@@ -34,7 +34,7 @@ export class GameComponent implements OnInit, OnDestroy {
     Auth.currentAuthenticatedUser().then((user) => {
       const userId = user.attributes.sub;
       this.serverBus
-        .connect()
+        .connect(userId)
         .pipe(
           tap((result) => {
             if (result.type === 'answers') {

@@ -13,17 +13,19 @@ export class ServerBusService implements OnDestroy {
 
   public constructor() {}
 
-  private getConnection(): WebSocketSubject<any> {
+  private getConnection(userId?): WebSocketSubject<any> {
     if (this.connection$) {
       return this.connection$;
     } else {
-      this.connection$ = webSocket(this.serverAddress);
+      this.connection$ = webSocket(
+        this.serverAddress + (!!userId ? '?userId=' + userId : '')
+      );
       return this.connection$;
     }
   }
 
-  public connect(): Observable<any> {
-    return this.getConnection();
+  public connect(userId): Observable<any> {
+    return this.getConnection(userId);
   }
 
   public send(data: any): void {
