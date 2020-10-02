@@ -4,8 +4,8 @@ on: [push]
 jobs:
   build:
     name: Test and Build
-    runs-on: macos-10.15
-    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
