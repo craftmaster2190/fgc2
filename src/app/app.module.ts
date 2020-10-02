@@ -31,6 +31,10 @@ import { GameComponent } from './game/game.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { PersonSelectorContainerComponent } from './person-selector-container/person-selector-container.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
+import { AuthGuard } from './websocket/auth-guard';
+import { HttpInterceptorProviders } from './websocket/interceptor-providers';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -68,6 +72,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NavbarComponent,
   ],
   imports: [
+    AmplifyAngularModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -78,8 +83,12 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     AlphabetFilterModule,
     MatCheckboxModule,
     MatExpansionModule,
+    MatSnackBarModule,
   ],
   providers: [
+    AmplifyService,
+    AuthGuard,
+    HttpInterceptorProviders,
     {
       provide: SWIPER_CONFIG,
       useValue: DEFAULT_SWIPER_CONFIG,

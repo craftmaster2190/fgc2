@@ -32,3 +32,6 @@ Lund
 slsw
 devtool
 apigw
+amazoncognito
+openid
+signin

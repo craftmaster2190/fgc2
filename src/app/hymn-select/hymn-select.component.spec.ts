@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HymnSelectComponent } from './hymn-select.component';
 import { AlphabetFilterModule } from 'alphabet-filter';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('HymnSelectComponent', () => {
   let component: HymnSelectComponent;
@@ -11,7 +12,7 @@ describe('HymnSelectComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [HymnSelectComponent],
-      imports: [AlphabetFilterModule, MatCheckboxModule],
+      imports: [AlphabetFilterModule, MatCheckboxModule, MatSnackBarModule],
     }).compileComponents();
   }));
 

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ServerBusService } from '../websocket/server-bus.service';
-import * as moment from 'moment';
+import { Auth } from 'aws-amplify';
 
 @Component({
   selector: 'app-home',
@@ -9,4 +8,8 @@ import * as moment from 'moment';
 })
 export class HomeComponent implements OnInit {
   public ngOnInit(): void {}
+
+  public onLoginClick(): void {
+    Auth.federatedSignIn();
+  }
 }

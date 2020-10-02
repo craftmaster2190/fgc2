@@ -33,6 +33,8 @@
     "@ngneat/until-destroy": "^8.0.2",
     "@types/swiper": "^5.4.0",
     "alphabet-filter": "^1.2.0",
+    "aws-amplify": "^3.3.3",
+    "aws-amplify-angular": "^5.0.32",
     "change-case": "^4.1.1",
     "copy-anything": "^2.0.1",
     "depcheck": "^1.2.0",

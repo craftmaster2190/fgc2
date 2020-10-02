@@ -1,10 +1,9 @@
-import { APIGatewayEvent, APIGatewayProxyResult, Context } from 'aws-lambda';
+import { APIGatewayEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { WS } from './domain/ws';
 import { responseBody } from './domain/responseBody';
 
 export async function handler(
-  event: APIGatewayEvent,
-  context: Context
+  event: APIGatewayEvent
 ): Promise<APIGatewayProxyResult> {
   console.error('event', event);
   await new WS().sendToClient(event, {

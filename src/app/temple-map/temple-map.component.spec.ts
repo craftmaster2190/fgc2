@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TempleMapComponent } from './temple-map.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('TempleMapComponent', () => {
   let component: TempleMapComponent;
@@ -9,6 +10,7 @@ describe('TempleMapComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TempleMapComponent],
+      imports: [MatSnackBarModule],
     }).compileComponents();
 
     (await import('jvectormap-next')).default(jQuery);

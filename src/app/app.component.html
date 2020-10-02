@@ -2,13 +2,12 @@
 
 <app-countdown></app-countdown>
 
-<div>
-  <a routerLink="/home">/home</a>
-</div>
-<div>
-  <a routerLink="/game">/game</a>
-</div>
-
 <router-outlet></router-outlet>
 
-<app-navbar></app-navbar>
+<app-navbar (click)="signOutDialog()"></app-navbar>
+
+<div *ngIf="loading" class="loading-block-container-container">
+  <div class="loading-block-container">
+    <div class="loading-block"></div>
+  </div>
+</div>

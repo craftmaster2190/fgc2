@@ -1,5 +1,5 @@
 <div style="padding: 4px 12px">
-  <div class="fgc-flex-center">Welcome!</div>
+  <h1 class="fgc-flex-center">Welcome!</h1>
 
   <div>How to play:</div>
   <div>
@@ -107,7 +107,7 @@
       <ng-template [ngForOf]="sessions" let-session ngFor>
         <div class="fgc-flex-center">
           What color will the choir be wearing during
-          {{ sessionNames[session] }}
+          <b>{{ sessionNames[session] }}</b>
         </div>
         <app-choir-swipe-select
           [(selectedColor)]="gameData.answers.choirColors[session]"
@@ -123,7 +123,7 @@
     </mat-expansion-panel-header>
     <div class="hymns">
       <div>
-        I think the hymns to be sung will be:
+        I think the hymns to be sung will be: (Max 10)
         {{ gameData.answers.selectedHymns?.join(", ") }}
       </div>
       <app-hymn-select
@@ -144,7 +144,7 @@
         Pinch or spread to zoom in or out. Tap to select.
       </div>
 
-      <div>Which states of the U.S.A will get new temples?</div>
+      <div>I think these states of the U.S.A will get new temples: Max 5</div>
       <app-temple-map
         [(selectedRegionNames)]="gameData.answers.newTemples.usa"
         mode="usa"
@@ -152,7 +152,8 @@
       <div>{{ gameData.answers.newTemples.usa?.join(", ") }}</div>
 
       <div>
-        Which countries will get new temples? (Not including the U.S.A.)
+        I think these countries will get new temples (Not including the U.S.A.):
+        Max 5
       </div>
       <app-temple-map
         [(selectedRegionNames)]="gameData.answers.newTemples.world"
@@ -163,17 +164,7 @@
   </mat-expansion-panel>
 </mat-accordion>
 
-<div
-  *ngIf="loading"
-  style="
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.3);
-  "
->
+<div *ngIf="loading" class="loading-block-container-container">
   <div class="loading-block-container">
     <div class="loading-block"></div>
   </div>

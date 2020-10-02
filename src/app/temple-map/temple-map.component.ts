@@ -17,6 +17,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { transpose } from '../../util/objects';
 import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 type VectorMapInit = JQuery & {
   vectorMap: (addMap: 'addMap', mapName: string, mapContent: any) => JQuery;
@@ -25,8 +26,6 @@ type VectorMap = JQuery & {
   vectorMap: (options: any) => JQuery;
 };
 
-const MAX_REGIONS = 5;
-
 @UntilDestroy()
 @Component({
   selector: 'app-temple-map',
@@ -34,6 +33,8 @@ const MAX_REGIONS = 5;
   styleUrls: ['./temple-map.component.scss'],
 })
 export class TempleMapComponent implements OnChanges, AfterViewInit, OnDestroy {
+  private static readonly MAX_REGIONS = 5;
+
   @ViewChild('map') public mapElement: ElementRef;
   @Input() public mode: 'world' | 'usa';
   @Input() public selectedRegionNames: Array<string>;
@@ -54,7 +55,10 @@ export class TempleMapComponent implements OnChanges, AfterViewInit, OnDestroy {
     )
     .subscribe();
 
-  public constructor(private readonly ngZone: NgZone) {}
+  public constructor(
+    private readonly ngZone: NgZone,
+    private readonly snackBar: MatSnackBar
+  ) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.mode && !changes.mode.isFirstChange()) {
@@ -126,7 +130,9 @@ export class TempleMapComponent implements OnChanges, AfterViewInit, OnDestroy {
             isSelected: boolean,
             selectedRegions: Array<string>
           ) => {
-            this.mapUpdateSelectedRegions(this.removeAmerica(selectedRegions));
+            this.mapUpdateSelectedRegions(
+              this.removeAmerica(event, isSelected, code, selectedRegions)
+            );
           },
         });
 
@@ -157,7 +163,7 @@ export class TempleMapComponent implements OnChanges, AfterViewInit, OnDestroy {
       }
       regions = regions.slice().sort();
 
-      this.mapObject.setSelectedRegions(regions);
+      // this.mapObject.setSelectedRegions(regions);
       this.ngZone.run(() => {
         this.selectedRegions = regions;
         this.selectedRegionNamesChange.emit(
@@ -177,13 +183,40 @@ export class TempleMapComponent implements OnChanges, AfterViewInit, OnDestroy {
     );
   }
 
-  private removeAmerica(regions: Array<string>): Array<string> {
-    const index = regions.findIndex((regionCode) => regionCode === 'US');
-    if (index > -1) {
-      regions.splice(index, 1);
-      this.mapObject.clearSelectedRegions();
-      this.mapObject.setSelectedRegions(regions);
+  private removeAmerica(
+    event: Event,
+    isSelected: boolean,
+    newlySelectedRegion: string,
+    regions: Array<string>
+  ): Array<string> {
+    if (isSelected) {
+      const index = regions.findIndex((regionCode) => regionCode === 'US');
+      if (index > -1) {
+        regions.splice(index, 1);
+        this.mapObject.clearSelectedRegions();
+        this.mapObject.setSelectedRegions(regions);
+      }
+
+      if (regions.length > TempleMapComponent.MAX_REGIONS) {
+        if (this.selectedRegions.length > TempleMapComponent.MAX_REGIONS) {
+          regions = this.selectedRegions.slice(0, 5);
+        } else {
+          regions = this.selectedRegions;
+        }
+        this.mapObject.clearSelectedRegions();
+        this.mapObject.setSelectedRegions(regions);
+        this.ngZone.run(() =>
+          this.snackBar.open(
+            `Max of ${TempleMapComponent.MAX_REGIONS} New Temples!`,
+            undefined,
+            {
+              duration: 2000,
+            }
+          )
+        );
+      }
     }
+
     return regions;
   }
 }
