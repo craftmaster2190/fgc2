@@ -2,6 +2,7 @@
   <swiper
     (indexChange)="onIndexChange($event)"
     (swiperClick)="onSwiperClick($event)"
+    [disabled]="disabled"
     [index]="selectedIndex"
     [style.height.px]="imageHeight"
   >

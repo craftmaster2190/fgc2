@@ -41,6 +41,7 @@ export class TempleMapComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Output() public selectedRegionNamesChange = new EventEmitter<
     Array<string>
   >();
+  @Input() public disabled: boolean;
   private mapObject;
   private selectedRegions = [];
   private readonly regionKeys2RegionNames: StringMap = {};
@@ -68,10 +69,17 @@ export class TempleMapComponent implements OnChanges, AfterViewInit, OnDestroy {
     if (changes.selectedRegionNames) {
       this.onChangeSelectedRegionNames.next(this.selectedRegionNames);
     }
+
+    if (changes.disabled && !changes.disabled.isFirstChange()) {
+      this.ngOnDestroy();
+      this.ngAfterViewInit();
+    }
   }
 
   public ngOnDestroy(): void {
-    this.mapObject?.destroy?.();
+    this.ngZone.runOutsideAngular(() => {
+      this.mapObject?.destroy?.();
+    });
   }
 
   public ngAfterViewInit(): void {
@@ -99,7 +107,7 @@ export class TempleMapComponent implements OnChanges, AfterViewInit, OnDestroy {
           this.mapElement.nativeElement
         ) as VectorMap).vectorMap({
           map: mapName,
-          regionsSelectable: true,
+          regionsSelectable: !this.disabled,
           regionStyle: {
             hover: {
               cursor: 'pointer',

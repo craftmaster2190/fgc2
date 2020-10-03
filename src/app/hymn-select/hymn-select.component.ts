@@ -22,6 +22,7 @@ export class HymnSelectComponent implements OnChanges, AfterViewInit {
   public selectedHymnsSet = new Set<string>();
   @Input() public selectedHymns: Array<string>;
   @Output() public selectedHymnsChange = new EventEmitter<Array<string>>();
+  @Input() public disabled: boolean;
 
   public readonly hymns = Array.from(new Set<string>(Hymns))
     .sort()
@@ -41,9 +42,12 @@ export class HymnSelectComponent implements OnChanges, AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    this.elementRef.nativeElement.querySelector(
+    const alphaSearchInput = this.elementRef.nativeElement.querySelector(
       '.alpha-search-input input'
-    ).disabled = true;
+    );
+    if (alphaSearchInput) {
+      alphaSearchInput.disabled = true;
+    }
   }
 
   public isDisabled(): boolean {

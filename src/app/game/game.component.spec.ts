@@ -10,6 +10,7 @@ import { TempleMapComponent } from '../temple-map/temple-map.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ServerBusService } from '../websocket/server-bus.service';
 import { of } from 'rxjs';
+import { ScoreboardComponent } from '../scoreboard/scoreboard.component';
 
 describe('GameComponent', () => {
   let component: GameComponent;
@@ -23,6 +24,7 @@ describe('GameComponent', () => {
         MockComponent(ChoirSwipeSelectComponent),
         MockComponent(HymnSelectComponent),
         MockComponent(TempleMapComponent),
+        MockComponent(ScoreboardComponent),
       ],
       providers: [
         {

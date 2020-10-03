@@ -18,6 +18,7 @@ export class SwipeSelectComponent implements OnInit {
   @Input() public imageWidth: number;
   @Input() public selectedIndex: number;
   @Output() public selectedIndexChange = new EventEmitter<number>();
+  @Input() public disabled: boolean;
 
   public constructor() {}
 

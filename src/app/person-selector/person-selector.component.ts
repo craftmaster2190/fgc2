@@ -22,12 +22,16 @@ export class PersonSelectorComponent implements OnInit {
   @Output() public tieColorChange = new EventEmitter<TieColor>();
   @Input() public session: Session;
   @Output() public sessionChange = new EventEmitter<Session>();
+  @Input() public disabled: boolean;
 
   public constructor(private readonly matDialog: MatDialog) {}
 
   public ngOnInit(): void {}
 
   public openDialog(): void {
+    if (this.disabled) {
+      return;
+    }
     this.matDialog
       .open(PersonDetailsSelectorDialogComponent, {
         data: {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { first, switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import mergeOptions from 'merge-options';
 import { ReplaySubject, timer } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -44,6 +44,10 @@ export class GameSocket {
 
                   this.initSubject.next(null);
                   this.loading = false;
+                } else if (result.type === 'scores') {
+                  this.gameData.scores = result.scores;
+                } else if (result.type === 'corrects') {
+                  this.gameData.corrects = result.corrects;
                 } else {
                   // tslint:disable-next-line:no-console
                   console.log('result', result);
@@ -67,9 +71,14 @@ export class GameSocket {
           const localStorageKey = userId + '-answers';
           const answers = copy(this.gameData.answers);
 
+          ['firstPresidency', 'apostles'].map((category) =>
+            Object.values(answers[category]).map((name: PersonData) => {
+              delete name.src;
+              delete name.name;
+            })
+          );
+
           [
-            'firstPresidency',
-            'apostles',
             'presidencySeventy',
             'presidingBishopric',
             'reliefSociety',
@@ -77,12 +86,9 @@ export class GameSocket {
             'youngMen',
             'primary',
             'sundaySchool',
-          ].map((category) =>
-            Object.values(answers[category]).map((name: PersonData) => {
-              delete name.src;
-              delete name.name;
-            })
-          );
+          ].map((category) => {
+            delete answers[category];
+          });
 
           const answersString = JSON.stringify(answers);
           const cachedAnswersString = localStorage.getItem(localStorageKey);

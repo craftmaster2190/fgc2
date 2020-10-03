@@ -210,6 +210,13 @@ export class GameDataService {
     },
   };
 
+  public corrects = {};
+
+  public scores: Array<{
+    score: number;
+    username: string;
+  }> = [];
+
   public constructor() {
     [
       'firstPresidency',

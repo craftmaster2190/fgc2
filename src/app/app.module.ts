@@ -42,6 +42,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { AdminGuard } from './websocket/admin-guard';
+import { ScoreboardComponent } from './scoreboard/scoreboard.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -78,6 +81,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     PersonSelectorContainerComponent,
     NavbarComponent,
     AdminViewComponent,
+    ScoreboardComponent,
   ],
   imports: [
     AmplifyAngularModule,
@@ -98,6 +102,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatTableModule,
+    MatSortModule,
   ],
   providers: [
     AmplifyService,

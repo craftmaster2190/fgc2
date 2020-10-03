@@ -2,6 +2,7 @@
 <alphabet-filter
   [data]="hymns"
   [withTemplate]="true"
+  *ngIf="!disabled"
   height="700px"
   listClass="search-list"
   placeholder="Select Hymns"
@@ -13,6 +14,7 @@
       <mat-checkbox
         (change)="onCheckBox($event, item)"
         [checked]="selectedHymnsSet.has(item.name)"
+        [disabled]="disabled"
       >
         <span>{{ item.name }}</span>
       </mat-checkbox>

@@ -27,6 +27,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }, {});
 
   public constructor(
+    public readonly timeDisabledService: TimeDisabledService,
     public readonly gameData: GameDataService,
     public readonly gameSocket: GameSocket,
     public readonly userHolder: UserHolderService

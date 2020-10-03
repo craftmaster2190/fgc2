@@ -8,6 +8,7 @@ import { PersonData } from '../game/game-data.service';
 })
 export class PersonSelectorContainerComponent implements OnInit {
   @Input() public person: PersonData;
+  @Input() public disabled: boolean;
 
   public constructor() {}
 

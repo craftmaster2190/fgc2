@@ -28,6 +28,7 @@ export class ChoirSwipeSelectComponent implements OnChanges {
   public readonly choirColors = ChoirColorsSwipeArray;
   @Input() public selectedColor: ChoirColor;
   @Output() public selectedColorChange = new EventEmitter<ChoirColor>();
+  @Input() public disabled: boolean;
 
   public constructor() {}
 
