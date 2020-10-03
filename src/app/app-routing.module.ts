@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { GameComponent } from './game/game.component';
 import { AuthGuard } from './websocket/auth-guard';
+import { AdminViewComponent } from './admin-view/admin-view.component';
+import { AdminGuard } from './websocket/admin-guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -14,6 +16,11 @@ const routes: Routes = [
     path: 'game',
     component: GameComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin',
+    component: AdminViewComponent,
+    canActivate: [AuthGuard, AdminGuard],
   },
 ];
 

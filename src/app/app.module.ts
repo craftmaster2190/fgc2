@@ -35,6 +35,13 @@ import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 import { AuthGuard } from './websocket/auth-guard';
 import { HttpInterceptorProviders } from './websocket/interceptor-providers';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AdminViewComponent } from './admin-view/admin-view.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { AdminGuard } from './websocket/admin-guard';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -70,6 +77,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     GameComponent,
     PersonSelectorContainerComponent,
     NavbarComponent,
+    AdminViewComponent,
   ],
   imports: [
     AmplifyAngularModule,
@@ -84,11 +92,18 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatCheckboxModule,
     MatExpansionModule,
     MatSnackBarModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
   ],
   providers: [
     AmplifyService,
     AuthGuard,
-    HttpInterceptorProviders,
+    AdminGuard,
+    ...HttpInterceptorProviders,
     {
       provide: SWIPER_CONFIG,
       useValue: DEFAULT_SWIPER_CONFIG,

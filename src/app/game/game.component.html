@@ -1,6 +1,8 @@
 <div style="padding: 4px 12px">
   <h1 class="fgc-flex-center">Welcome!</h1>
 
+  <a *ngIf="userHolder.isAdmin() | async" routerLink="/admin">Admin View</a>
+
   <div>How to play:</div>
   <div>
     Tap a section below to make a guess of who you think will be speaking, which
@@ -98,9 +100,7 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>Choir Colors</mat-panel-title>
-      <mat-panel-description
-        >What will the choir be wearing?</mat-panel-description
-      >
+      <mat-panel-description>What will the choir be wearing?</mat-panel-description>
     </mat-expansion-panel-header>
     <div class="choir-colors">
       <div class="instructions">Swipe left or right</div>
@@ -126,23 +126,19 @@
         I think the hymns to be sung will be: (Max 10)
         {{ gameData.answers.selectedHymns?.join(", ") }}
       </div>
-      <app-hymn-select
-        [(selectedHymns)]="gameData.answers.selectedHymns"
-      ></app-hymn-select>
+      <app-hymn-select [(selectedHymns)]="gameData.answers.selectedHymns"></app-hymn-select>
     </div>
   </mat-expansion-panel>
 
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>Temples</mat-panel-title>
-      <mat-panel-description
-        >Where will new temples be built?</mat-panel-description
-      >
+      <mat-panel-description>Where will new temples be built?</mat-panel-description>
     </mat-expansion-panel-header>
     <div class="temples">
-      <div class="instructions">
-        Pinch or spread to zoom in or out. Tap to select.
-      </div>
+      <div
+        class="instructions"
+      >Pinch or spread to zoom in or out. Tap to select.</div>
 
       <div>I think these states of the U.S.A will get new temples: Max 5</div>
       <app-temple-map
@@ -164,7 +160,7 @@
   </mat-expansion-panel>
 </mat-accordion>
 
-<div *ngIf="loading" class="loading-block-container-container">
+<div *ngIf="gameSocket.isLoading()" class="loading-block-container-container">
   <div class="loading-block-container">
     <div class="loading-block"></div>
   </div>

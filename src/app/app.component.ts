@@ -1,7 +1,7 @@
 import { Component, NgZone } from '@angular/core';
 import { Auth, Hub } from 'aws-amplify';
 import { Router } from '@angular/router';
-import { AmplifyService } from 'aws-amplify-angular';
+import { UserHolderService } from './websocket/user-holder.service';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +10,11 @@ import { AmplifyService } from 'aws-amplify-angular';
 })
 export class AppComponent {
   public loading: boolean;
-  public user;
 
   public constructor(
     private readonly router: Router,
-    private readonly ngZone: NgZone
+    private readonly ngZone: NgZone,
+    private readonly userHolder: UserHolderService
   ) {
     this.loading = true;
 
@@ -23,8 +23,11 @@ export class AppComponent {
       console.log(event);
       if (event === 'cognitoHostedUI' || event === 'signedIn') {
         this.ngZone.run(() => {
-          this.router.navigate(['/game']);
-          this.loading = false;
+          console.log('send to game');
+          this.router
+            .navigate(['/game'])
+            .catch((err) => console.log(err))
+            .then(() => (this.loading = false));
         });
       }
     });
@@ -33,15 +36,20 @@ export class AppComponent {
     Auth.currentAuthenticatedUser()
       .then((user) => {
         console.log('user', user);
-        this.user = user;
+        this.userHolder.setUser(user);
         return this.ngZone.run(() => {
+          console.log('send to admin');
           return this.router.navigate(['/game'], { replaceUrl: true });
+          // TODO /game
         });
       })
       .catch((err) => {
         console.log(err);
         console.log('Go home', location.href);
-        return this.router.navigate(['/home'], { replaceUrl: true });
+        return this.ngZone.run(() => {
+          console.log('send to home');
+          return this.router.navigate(['/home'], { replaceUrl: true });
+        });
       })
       .then(() => (this.loading = false));
   }

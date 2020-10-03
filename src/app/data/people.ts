@@ -1,4 +1,4 @@
-export const people = [
+export const firstPresidency = [
   // cspell:disable
   'Russell M. Nelson',
   'Dallin H. Oaks',

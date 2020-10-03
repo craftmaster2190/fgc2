@@ -10,6 +10,8 @@ import { copy } from 'copy-anything';
 import { TimeDisabledService } from '../countdown/time-disabled.service';
 import mergeOptions from 'merge-options';
 import { Auth } from 'aws-amplify';
+import { GameSocket } from './game-socket.ts.service';
+import { UserHolderService } from '../websocket/user-holder.service';
 
 @UntilDestroy()
 @Component({
@@ -23,78 +25,14 @@ export class GameComponent implements OnInit, OnDestroy {
     obj[session] = capitalCase(session);
     return obj;
   }, {});
-  private readonly initSubject = new ReplaySubject<null>(1);
-  public loading: boolean;
 
   public constructor(
     public readonly gameData: GameDataService,
-    private readonly timeDisabledService: TimeDisabledService,
-    private readonly serverBus: ServerBusService
-  ) {
-    Auth.currentAuthenticatedUser().then((user) => {
-      const userId = user.attributes.sub;
-      this.serverBus
-        .connect(userId)
-        .pipe(
-          tap((result) => {
-            if (result.type === 'answers') {
-              Object.assign(
-                this.gameData.answers,
-                mergeOptions(this.gameData.answers, result.answers)
-              );
-
-              this.initSubject.next(null);
-              this.loading = false;
-            } else {
-              // tslint:disable-next-line:no-console
-              console.log('result', result);
-            }
-          })
-        )
-        .subscribe();
-      this.serverBus.send({ action: 'init', userId });
-      timer(0, 5000)
-        .pipe(
-          untilDestroyed(this),
-          switchMap(() => this.initSubject),
-          tap(() => {
-            const localStorageKey = userId + '-answers';
-            const answers = copy(this.gameData.answers);
-
-            [
-              'firstPresidency',
-              'apostles',
-              'presidencySeventy',
-              'presidingBishopric',
-              'reliefSociety',
-              'youngWomen',
-              'youngMen',
-              'primary',
-              'sundaySchool',
-            ].map((category) =>
-              Object.values(answers[category]).map((name: PersonData) => {
-                delete name.src;
-                delete name.name;
-              })
-            );
-
-            const answersString = JSON.stringify(answers);
-            const cachedAnswersString = localStorage.getItem(localStorageKey);
-            if (cachedAnswersString !== answersString) {
-              localStorage.setItem(localStorageKey, answersString);
-              if (!timeDisabledService.isDisabled()) {
-                this.serverBus.send({ action: 'answer', answers, userId });
-              }
-            }
-          })
-        )
-        .subscribe();
-    });
-  }
+    public readonly gameSocket: GameSocket,
+    public readonly userHolder: UserHolderService
+  ) {}
 
   public ngOnInit(): void {}
 
-  public ngOnDestroy(): void {
-    this.serverBus.disconnect();
-  }
+  public ngOnDestroy(): void {}
 }

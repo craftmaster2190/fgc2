@@ -7,16 +7,39 @@ import { responseBody } from './domain/responseBody';
 export async function handler(
   event: APIGatewayEvent
 ): Promise<APIGatewayProxyResult> {
-  const response = await new DB().getAnswers(getUser(event).userId);
-  console.log(response);
+  const db = new DB();
+  const ws = new WS();
 
-  let answersObj = response?.answers ?? '{}';
-  try {
-    answersObj = JSON.parse(answersObj);
-  } catch (e) {
-    console.error('Unable to JSON parse', e);
-  }
-  await new WS().sendToClient(event, { type: 'answers', answers: answersObj });
+  const promises = [];
+  promises.push(
+    db.getAnswers(getUser(event).userId).then(async (response) => {
+      console.log(response);
+
+      let answersObj = response?.answers ?? '{}';
+      try {
+        answersObj = JSON.parse(answersObj);
+      } catch (e) {
+        console.error('Unable to JSON parse', e);
+      }
+      await ws.sendToClient(event, { type: 'answers', answers: answersObj });
+    })
+  );
+
+  promises.push(
+    db
+      .getCorrectAnswers()
+      .then((correctAnswers) =>
+        ws.sendToClient(event, { type: 'corrects', corrects: correctAnswers })
+      )
+  );
+
+  promises.push(
+    db
+      .getScores()
+      .then((scores) => ws.sendToClient(event, { type: 'scores', scores }))
+  );
+
+  await Promise.all(promises);
 
   return responseBody(event);
 }

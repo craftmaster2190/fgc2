@@ -41,6 +41,12 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource: "arn:aws:dynamodb:*:*:table/*"
+    - Effect: "Allow"
+      Action:
+        - cognito-idp:ListUsers
+      # cSpell: disable
+      Resource: "arn:aws:cognito-idp:us-east-1:035010029185:userpool/us-east-1_JXjir8RPT"
+      # cSpell: enable
 
 functions:
   connectHandler:
@@ -68,3 +74,8 @@ functions:
     events:
       - websocket:
           route: init
+  onAdminAnswerHandler:
+    handler: onAdminAnswer.handler
+    events:
+      - websocket:
+          route: adminanswer
