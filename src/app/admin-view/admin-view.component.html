@@ -93,7 +93,7 @@
 
     <button
       (click)="addTemple()"
-      [disabled]="!!selectedStateOrCountry.value"
+      [disabled]="!selectedStateOrCountry.value"
       mat-raised-button
     >Add Temple</button>
   </ng-template>
