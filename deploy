@@ -1,5 +1,4 @@
 #!/bin/bash
 
 if [[ $(git rev-parse --abbrev-ref HEAD) = 'master' ]]; then
-    aws s3 sync dist/fgc2/ s3://fantasygc2/ --delete
 fi

@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  FGCUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties: { }
+    Metadata:
+      AWS::CloudFormation::Designer:
+        id: 83317135-33f2-4fb3-bb7d-0cd5cc9fdce6
+  FGCUserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId:
+        Ref: FGCUserPool
+    Metadata:
+      AWS::CloudFormation::Designer:
+        id: 05f5abe1-b0f1-4ca9-a991-48742be45052
+    DependsOn:
+      - FGCUserPool
+  FGCBucket:
+    Type: AWS::S3::Bucket
+    Properties: { }
+    Metadata:
+      AWS::CloudFormation::Designer:
+        id: 2879812b-5957-441f-bab5-29b4881a5ff0
+  FGCCloudfront:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Enabled: true
+        Origins:
+          - Id: FGCCloudfront
+            DomainName: fantasygc.org
+            S3OriginConfig:
+              OriginAccessIdentity: origin-access-identity/cloudfront/E127EXAMPLE51Z
+        DefaultRootObject: index.html
+        DefaultCacheBehavior:

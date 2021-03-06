@@ -1,0 +1,71 @@
+name: Deploy
+
+on: [ push ]
+jobs:
+  build:
+    name: Test and Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Setup AWS CLI
+        if: github.ref == 'refs/heads/master'
+        uses: unfor19/install-aws-cli-action@v1
+
+      - name: Setup AWS Credentials
+        if: github.ref == 'refs/heads/master'
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: us-east-1
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Script
+        run: |
+          curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.36.0/install.sh | bash
+          export NVM_DIR=$HOME/.nvm
+          source $NVM_DIR/nvm.sh
+          nvm install
+          node --version
+          which node
+          npm --version
+          which npm
+          git rev-parse --abbrev-ref HEAD
+
+          npm ci
+          npm run lint
+          npm run test:ci
+          npm run clean
+          npm run build:ci
+          if [[ $(git rev-parse --abbrev-ref HEAD) = 'master' ]]; then
+              # aws cloudformation deploy \
+              #   --template-file fgc2-infrastructure.template \
+              #   --stack-name fgc2-infrastructure || \
+              # aws cloudformation describe-stack-events \
+              #   --stack-name fgc2-infrastructure && exit 1
+
+              pushd src/lambda || exit 1
+              npm install -g serverless
+              npm ci
+              sls deploy
+              popd
+
+              aws s3 sync dist/fgc2/ s3://fantasygc/live/ --delete
+          fi
+
+      #      - name: Setup Sentry
+      #        if: github.ref == 'refs/heads/master'
+      #        run: sed -i '' "s|XXX_SENTRY_DSN_XXX|${{ secrets.SENTRY_DSN }}|" src/lambda/handler.ts
+
+      #      - name: Setup Sentry
+      #        run: sed -i '' "s|XXX_SENTRY_DSN_XXX|${{ secrets.SENTRY_DSN }}|" src/index.html
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: Build Files
+          path: dist
+
+
