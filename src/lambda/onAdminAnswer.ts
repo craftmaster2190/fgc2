@@ -5,6 +5,9 @@ import { getUserForSub } from './domain/cognito';
 import { WS } from './domain/ws';
 import { CorrectAnswer, DB } from './domain/db';
 import { bodyOf } from './domain/bodyOf';
+import { initSentry } from './domain/sentry';
+
+initSentry();
 
 interface UserAnswers {
   firstPresidency: Record<

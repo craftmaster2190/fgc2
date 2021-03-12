@@ -1,9 +1,0 @@
-#!/bin/bash
-
-function main() {
-
-}
-
-if [[ $(git rev-parse --abbrev-ref HEAD) = 'master' ]]; then
-    main
-fi

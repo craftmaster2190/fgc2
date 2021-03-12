@@ -45,7 +45,7 @@ provider:
       Action:
         - cognito-idp:ListUsers
       # cSpell: disable
-      Resource: "arn:aws:cognito-idp:us-east-1:035010029185:userpool/us-east-1_JXjir8RPT"
+      Resource: "arn:aws:cognito-idp:us-east-1:035010029185:userpool/us-east-1_XpUg7805q"
       # cSpell: enable
 
 functions:

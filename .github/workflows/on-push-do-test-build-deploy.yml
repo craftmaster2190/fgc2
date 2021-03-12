@@ -1,0 +1,49 @@
+name: FantasyGC.org
+
+on: push
+jobs:
+  test-build-deploy:
+    name: Test, Build, Deploy
+    runs-on: ubuntu-20.04
+    timeout-minutes: 20
+    steps:
+      - name: Setup AWS CLI
+        if: github.ref == 'refs/heads/master'
+        uses: unfor19/install-aws-cli-action@v1
+
+      - name: Setup AWS Credentials
+        if: github.ref == 'refs/heads/master'
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: us-east-1
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Sentry
+        if: github.ref == 'refs/heads/master'
+        run: |
+          sed --in-place "s|XXX_SENTRY_DSN_XXX|${{ secrets.SENTRY_DSN }}|" src/lambda/domain/sentry.ts
+          sed --in-place "s|XXX_SENTRY_DSN_XXX|${{ secrets.SENTRY_DSN }}|" src/index.html
+
+      - name: Build Script
+        run: |
+          curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.36.0/install.sh | bash
+          export NVM_DIR=$HOME/.nvm
+          source $NVM_DIR/nvm.sh
+          nvm install
+          node --version
+          which node
+          npm --version
+          which npm
+          ./deploy
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: Build Files
+          path: dist
+
+

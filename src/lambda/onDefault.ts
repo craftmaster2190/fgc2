@@ -2,6 +2,9 @@ import { APIGatewayEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { WS } from './domain/ws';
 import { responseBody } from './domain/responseBody';
 import { bodyOf } from './domain/bodyOf';
+import { initSentry } from './domain/sentry';
+
+initSentry();
 
 export async function handler(
   event: APIGatewayEvent

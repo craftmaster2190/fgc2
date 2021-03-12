@@ -3,13 +3,13 @@ import { WebSocketSubject } from 'rxjs/internal-compatibility';
 import { Observable } from 'rxjs';
 import { webSocket } from 'rxjs/webSocket';
 import { UserHolderService } from './user-holder.service';
+import { env } from '../../environments/environment.getter';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ServerBusService implements OnDestroy {
-  private readonly serverAddress =
-    'wss://oyz7jg88i9.execute-api.us-east-1.amazonaws.com/production';
+  private readonly serverAddress = env().webSocketUrl;
   public connection$: WebSocketSubject<any>;
   private userId;
 

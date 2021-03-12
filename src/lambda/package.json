@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sentry/serverless": "^6.2.2",
     "source-map-support": "^0.5.10"
   },
   "devDependencies": {

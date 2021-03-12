@@ -16,21 +16,3 @@ Resources:
         id: 05f5abe1-b0f1-4ca9-a991-48742be45052
     DependsOn:
       - FGCUserPool
-  FGCBucket:
-    Type: AWS::S3::Bucket
-    Properties: { }
-    Metadata:
-      AWS::CloudFormation::Designer:
-        id: 2879812b-5957-441f-bab5-29b4881a5ff0
-  FGCCloudfront:
-    Type: AWS::CloudFront::Distribution
-    Properties:
-      DistributionConfig:
-        Enabled: true
-        Origins:
-          - Id: FGCCloudfront
-            DomainName: fantasygc.org
-            S3OriginConfig:
-              OriginAccessIdentity: origin-access-identity/cloudfront/E127EXAMPLE51Z
-        DefaultRootObject: index.html
-        DefaultCacheBehavior:

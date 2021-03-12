@@ -3,6 +3,9 @@ import { DB } from './domain/db';
 import { WS } from './domain/ws';
 import { getUser } from './domain/user';
 import { responseBody } from './domain/responseBody';
+import { initSentry } from './domain/sentry';
+
+initSentry();
 
 export async function handler(
   event: APIGatewayEvent

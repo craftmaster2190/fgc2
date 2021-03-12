@@ -1,4 +1,25 @@
 #!/bin/bash
 
+git rev-parse --abbrev-ref HEAD
+
+npm ci
+npm run lint
+npm run test:ci
+npm run clean
+npm run build:ci
 if [[ $(git rev-parse --abbrev-ref HEAD) = 'master' ]]; then
+    # aws cloudformation deploy \
+    #   --template-file fgc2-infrastructure.template \
+    #   --stack-name fgc2-infrastructure || \
+    # aws cloudformation describe-stack-events \
+    #   --stack-name fgc2-infrastructure && exit 1
+
+    pushd src/lambda || exit 1
+    npm install -g serverless
+    npm ci
+    sls deploy
+    popd
+
+    aws s3 sync dist/fgc2/ "s3://fantasygc/v$(date --iso-8601=hour)/" --no-progress --delete
+    aws s3 sync dist/fgc2/ s3://fantasygc/live/ --no-progress --delete
 fi

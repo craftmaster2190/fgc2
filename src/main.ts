@@ -2,13 +2,13 @@ import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
 
 import Amplify from 'aws-amplify';
+import { env } from './environments/environment.getter';
 
-Amplify.configure(environment.cognitoSettings);
+Amplify.configure(env().cognitoSettings);
 
-if (environment.production) {
+if (env().production) {
   enableProdMode();
 }
 

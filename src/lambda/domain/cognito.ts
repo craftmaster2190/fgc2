@@ -1,5 +1,6 @@
 import * as AWS from 'aws-sdk';
 import { CognitoIdentityServiceProvider } from 'aws-sdk';
+import { env } from '../../environments/environment.getter';
 
 export async function getUserForSub(
   sub: string
@@ -11,7 +12,7 @@ export async function getUserForSub(
       .listUsers({
         Filter: `sub = "${sub}"`,
         // cSpell: disable
-        UserPoolId: 'us-east-1_JXjir8RPT',
+        UserPoolId: env().cognitoSettings.aws_user_pools_id,
         // cSpell: enable
       })
       .promise()
