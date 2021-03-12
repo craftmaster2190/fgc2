@@ -25,7 +25,7 @@ provider:
   environment:
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1'
 
-  stage: production
+  stage: api
   websocketsApiName: fgc-lambda-websockets-api
   websocketsApiRouteSelectionExpression: $request.body.action
   logs:
@@ -45,7 +45,7 @@ provider:
       Action:
         - cognito-idp:ListUsers
       # cSpell: disable
-      Resource: "arn:aws:cognito-idp:us-east-1:035010029185:userpool/us-east-1_XpUg7805q"
+      Resource: "arn:aws:cognito-idp:us-east-1:035010029185:userpool/us-east-1_qe0Tpp6YR"
       # cSpell: enable
 
 functions:
