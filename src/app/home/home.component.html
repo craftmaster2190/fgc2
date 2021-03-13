@@ -1,12 +1,48 @@
 <div class="fgc-flex-center">
-  <h1>April 2021 Beta</h1>
-
-  <div class="sign-in-buttons">
-    <button (click)="onLoginClick()" mat-raised-button>Sign Up / Sign In</button>
-  </div>
+  <h1
+    matTooltip="This page is still a work in progress. You may notice changes over the next few days."
+  >
+    April 2021
+    <span class="beta">Beta</span>
+  </h1>
 
   <div>
-    <h1 style="text-align: center; margin-top: 64px">It's finally ready!</h1>
-    <img src="assets/its-finally-ready.gif" style="border-radius: 6px">
+    <div class="hello-there">
+      Hello there,
+      <br>Welcome to Fantasy General Conference: a game of skill and luck.
+      <br>In this game, you will guess who will be speaking and what color tie
+      they will be wearing in the upcoming session of General Conference of the
+      Church of Jesus Christ of Latter-day Saints.
+      <br>I hope it is a fun and
+      spiritual experience.
+      <br>
+      <div class="signature">-- Bryce</div>
+    </div>
+
+    <div class="sign-in-buttons">
+      <button (click)="onLoginClick()" mat-raised-button>Sign Up / Sign In</button>
+    </div>
+
+    <div class="demo-portrait">
+      <img
+        class="demo-portrait-person person-image"
+        src="assets/people/firstPresidency/russellMNelson.jpg"
+      >
+      <img
+        class="demo-portrait-tie-1"
+        height="100"
+        src="assets/ties/purple-tie.jpg"
+      >
+      <img
+        class="demo-portrait-tie-2"
+        height="100"
+        src="assets/ties/red-tie.jpg"
+      >
+      <img
+        class="demo-portrait-tie-3"
+        height="100"
+        src="assets/ties/sky-blue-tie.jpg"
+      >
+    </div>
   </div>
 </div>

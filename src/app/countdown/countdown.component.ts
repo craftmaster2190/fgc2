@@ -44,11 +44,13 @@ export class CountdownComponent implements OnInit {
             }
           }
 
-          const hours = timeUntil.hours() + timeUntil.days() * 24;
+          const days = timeUntil.days();
+          const hours = timeUntil.hours();
           const minutes = timeUntil.minutes();
           const seconds = timeUntil.seconds();
 
           this.timeUntilText =
+            (days ? this.padNumber(days) + ' Days ' : '') +
             this.padNumber(hours) +
             ':' +
             this.padNumber(minutes) +

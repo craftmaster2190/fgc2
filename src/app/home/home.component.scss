@@ -1,6 +1,171 @@
+.beta {
+  font-size: 80%;
+  font-style: italic;
+  display: inline-flex;
+}
+
 .sign-in-buttons {
   display: flex;
   place-content: center center;
   place-items: center center;
   gap: 12px;
+  margin: 16px;
+}
+
+.hello-there {
+  max-width: 480px;
+  padding: 12px;
+
+  br {
+    margin-bottom: 10px;
+  }
+
+  .signature {
+    margin-left: 26px;
+  }
+}
+
+.person-image {
+  height: 300px;
+  border-radius: 50%;
+}
+
+.demo-portrait {
+  position: relative;
+  height: 300px;
+}
+
+.demo-portrait-person {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 120px);
+}
+
+.demo-portrait-tie-1,
+.demo-portrait-tie-2,
+.demo-portrait-tie-3 {
+  border-radius: 50%;
+  position: absolute;
+}
+
+$tie-width: 70px;
+$tie-width-half: $tie-width / 2;
+$tie-height: 100px;
+$portrait-tie-width: 150px;
+$animation-time: 7s;
+
+@mixin bottom-tie {
+  top: auto;
+  left: calc(50% - #{$tie-width-half});
+  right: auto;
+  bottom: -25px;
+}
+
+@mixin bottom-tie {
+  top: 225px;
+  left: calc(50% - #{$tie-width-half});
+  right: calc(50% + #{$tie-width-half});
+  bottom: -25px;
+}
+
+@mixin top-left-tie {
+  top: 0;
+  left: calc(50% - #{$portrait-tie-width});
+  right: calc(50% + #{$portrait-tie-width - $tie-width});
+  bottom: $tie-height;
+}
+
+@mixin top-right-tie {
+  top: 0;
+  left: calc(50% + #{$portrait-tie-width - $tie-width});
+  right: calc(50% - #{$portrait-tie-width});
+  bottom: $tie-height;
+}
+
+.demo-portrait-tie-1 {
+  @include bottom-tie;
+  animation: bottom-tie-animation $animation-time infinite;
+}
+
+.demo-portrait-tie-2 {
+  @include top-left-tie;
+  animation: top-left-tie-animation $animation-time infinite;
+}
+
+.demo-portrait-tie-3 {
+  @include top-right-tie;
+  animation: top-right-tie-animation $animation-time infinite;
+}
+
+@keyframes bottom-tie-animation {
+  0% {
+    @include bottom-tie;
+  }
+  15% {
+    @include bottom-tie;
+  }
+  30% {
+    @include top-left-tie;
+  }
+  45% {
+    @include top-left-tie;
+  }
+  60% {
+    @include top-right-tie;
+  }
+  75% {
+    @include top-right-tie;
+  }
+  100% {
+    @include bottom-tie;
+  }
+}
+
+@keyframes top-left-tie-animation {
+  0% {
+    @include top-left-tie;
+  }
+  15% {
+    @include top-left-tie;
+  }
+  30% {
+    @include top-right-tie;
+  }
+  45% {
+    @include top-right-tie;
+  }
+  60% {
+    @include bottom-tie;
+  }
+  75% {
+    @include bottom-tie;
+  }
+  100% {
+    @include top-left-tie;
+  }
+}
+
+@keyframes top-right-tie-animation {
+  0% {
+    @include top-right-tie;
+  }
+  15% {
+    @include top-right-tie;
+  }
+  30% {
+    @include bottom-tie;
+  }
+  45% {
+    @include bottom-tie;
+  }
+  60% {
+    @include top-left-tie;
+  }
+  75% {
+    @include top-left-tie;
+  }
+  100% {
+    @include top-right-tie;
+  }
 }

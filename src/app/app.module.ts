@@ -45,6 +45,7 @@ import { AdminGuard } from './websocket/admin-guard';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -99,6 +100,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatFormFieldModule,
     MatSelectModule,
     MatAutocompleteModule,
+    MatTooltipModule,
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,

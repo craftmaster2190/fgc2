@@ -10,17 +10,18 @@ import { compareFor } from '../../util/comparator';
 export class TimeDisabledService {
   public readonly sessionDuration = moment.duration(2, 'hours');
 
+  // As of March 2021, all conferences happen in MDT -06:00
   public readonly sessionStarts = {
     [Session.SaturdayMorningSession]: moment.utc(
-      '2020-10-03 10:00:00.000-06:00'
+      '2021-04-03 10:00:00.000-06:00'
     ),
     [Session.SaturdayAfternoonSession]: moment.utc(
-      '2020-10-03 14:00:00.000-06:00'
+      '2021-04-03 14:00:00.000-06:00'
     ),
-    [Session.PriesthoodSession]: moment.utc('2020-10-03 18:00:00.000-06:00'),
-    [Session.SundayMorningSession]: moment.utc('2020-10-04 10:00:00.000-06:00'),
+    [Session.PriesthoodSession]: moment.utc('2021-04-03 18:00:00.000-06:00'),
+    [Session.SundayMorningSession]: moment.utc('2021-04-04 10:00:00.000-06:00'),
     [Session.SundayAfternoonSession]: moment.utc(
-      '2020-10-04 14:00:00.000-06:00'
+      '2021-04-04 14:00:00.000-06:00'
     ),
   };
 

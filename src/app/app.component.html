@@ -1,10 +1,10 @@
-<div style="height: 64px"></div>
+<div style="height: 82px"></div>
 
 <app-countdown></app-countdown>
 
 <router-outlet></router-outlet>
 
-<app-navbar (click)="signOutDialog()"></app-navbar>
+<app-navbar (click)="signOutDialog()" matTooltip="Click to logout."></app-navbar>
 
 <div *ngIf="loading" class="loading-block-container-container">
   <div class="loading-block-container">
