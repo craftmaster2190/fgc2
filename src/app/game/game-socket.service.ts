@@ -172,9 +172,13 @@ export class GameSocket {
                 moment.duration(moment().diff(pageStarted)).asMilliseconds() +
                 'ms (Page loaded at: ' +
                 pageStarted.format() +
-                ')'
+                ') [' +
+                newUpdateTime +
+                ' !== ' +
+                currentUpdateTime +
+                ']'
             );
-            location.reload();
+            // location.reload();
           }
         })
       )

@@ -11,3 +11,9 @@ export function initSentry(): void {
     tracesSampleRate: 1.0,
   });
 }
+
+export function sendSentry(error): void {
+  const Sentry = require('@sentry/serverless');
+
+  Sentry.captureException(error);
+}
