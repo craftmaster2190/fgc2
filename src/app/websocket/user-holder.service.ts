@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
-import { first, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -15,19 +15,19 @@ export class UserHolderService {
     this.user.next(user);
   }
 
-  public getUserId(): Observable<string> {
-    return this.user.pipe(
-      map((user) => user.attributes?.sub),
-      first()
-    );
+  public watchUser(): Observable<any> {
+    return this.user.asObservable();
   }
 
-  public isAdmin(): Observable<boolean> {
+  public watchUserId(): Observable<string> {
+    return this.user.pipe(map((user) => user.attributes?.sub));
+  }
+
+  public watchIsAdmin(): Observable<boolean> {
     return this.user.pipe(
       map(
         (user) => user.attributes?.['custom:is-admin']?.toLowerCase() === 'true'
-      ),
-      first()
+      )
     );
   }
 }

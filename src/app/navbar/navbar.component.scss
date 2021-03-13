@@ -11,4 +11,11 @@
   background: white;
   border-bottom: 1px grey solid;
   padding: 4px 8px 0 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+mat-progress-spinner {
 }

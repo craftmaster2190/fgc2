@@ -9,11 +9,11 @@ describe('TimeDisabledService', () => {
   let timeDisabledService: TimeDisabledService;
   let nowService: NowService;
   const unixStart = {
-    [Session.SaturdayMorningSession]: 1601740800,
-    [Session.SaturdayAfternoonSession]: 1601755200,
-    [Session.PriesthoodSession]: 1601769600,
-    [Session.SundayMorningSession]: 1601827200,
-    [Session.SundayAfternoonSession]: 1601841600,
+    [Session.SaturdayMorningSession]: 1617465600,
+    [Session.SaturdayAfternoonSession]: 1617480000,
+    [Session.PriesthoodSession]: 1617494400,
+    [Session.SundayMorningSession]: 1617552000,
+    [Session.SundayAfternoonSession]: 1617566400,
   };
 
   beforeEach(() => {

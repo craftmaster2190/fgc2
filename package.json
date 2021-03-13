@@ -31,6 +31,7 @@
     "@angular/platform-browser-dynamic": "~10.0.14",
     "@angular/router": "~10.0.14",
     "@ngneat/until-destroy": "^8.0.2",
+    "@sentry/browser": "^6.2.2",
     "@types/swiper": "^5.4.0",
     "alphabet-filter": "^1.2.0",
     "assign-deep": "^1.0.1",

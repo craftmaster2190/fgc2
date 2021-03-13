@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -46,6 +46,9 @@ import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { SentryErrorHandler } from './sentry/sentry-error-handler.service';
+import { HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -85,6 +88,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ScoreboardComponent,
   ],
   imports: [
+    HttpClientModule,
     AmplifyAngularModule,
     BrowserModule,
     AppRoutingModule,
@@ -106,6 +110,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatInputModule,
     MatTableModule,
     MatSortModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     AmplifyService,
@@ -116,6 +121,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
       provide: SWIPER_CONFIG,
       useValue: DEFAULT_SWIPER_CONFIG,
     },
+    { provide: ErrorHandler, useClass: SentryErrorHandler },
   ],
   bootstrap: [AppComponent],
 })

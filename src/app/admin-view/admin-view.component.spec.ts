@@ -11,6 +11,7 @@ import { MockComponent } from 'ng-mocks';
 import { SessionSelectorComponent } from '../session-selector/session-selector.component';
 import { TieSelectComponent } from '../tie-select/tie-select.component';
 import { ChoirSwipeSelectComponent } from '../choir-swipe-select/choir-swipe-select.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AdminViewComponent', () => {
   let component: AdminViewComponent;
@@ -31,6 +32,7 @@ describe('AdminViewComponent', () => {
         MatSelectModule,
         FormsModule,
         ReactiveFormsModule,
+        HttpClientTestingModule,
         NoopAnimationsModule,
       ],
     }).compileComponents();

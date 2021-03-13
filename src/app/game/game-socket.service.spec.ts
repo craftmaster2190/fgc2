@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { GameSocket } from './game-socket.ts.service';
+import { GameSocket } from './game-socket.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('GameSocket', () => {
   let service: GameSocket;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({ imports: [HttpClientTestingModule] });
     service = TestBed.inject(GameSocket);
   });
 

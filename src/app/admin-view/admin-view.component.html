@@ -3,14 +3,17 @@
 <div>CORRECT_ANSWERS::</div>
 
 <form>
-  <app-session-selector [(selectedSession)]="selectedSession"></app-session-selector>
+  <app-session-selector
+    [(selectedSession)]="selectedSession"
+  ></app-session-selector>
   <mat-form-field appearance="fill">
     <mat-label>Type</mat-label>
     <mat-select [formControl]="selectedType">
       <mat-option
         [value]="type"
         *ngFor="let type of ['speaker', 'song', 'temple']"
-      >{{ type | titlecase }}</mat-option>
+        >{{ type | titlecase }}</mat-option
+      >
     </mat-select>
   </mat-form-field>
   <ng-template [ngIf]="selectedType.value === 'speaker'">
@@ -23,12 +26,13 @@
           name="speaker"
           placeholder="Pick Speaker"
           type="text"
-        >
+        />
         <mat-autocomplete #autoSpeakers="matAutocomplete">
           <mat-option
             [value]="speaker"
             *ngFor="let speaker of filteredSpeakers | async"
-          >{{ speaker }}</mat-option>
+            >{{ speaker }}</mat-option
+          >
         </mat-autocomplete>
       </mat-form-field>
     </div>
@@ -40,10 +44,14 @@
         !selectedSession || !selectedTieColor || !selectedSpeaker.value
       "
       mat-raised-button
-    >Add Speaker</button>
+    >
+      Add Speaker
+    </button>
   </ng-template>
   <ng-template [ngIf]="selectedType.value === 'song'">
-    <app-choir-swipe-select [(selectedColor)]="selectedChoirColor"></app-choir-swipe-select>
+    <app-choir-swipe-select
+      [(selectedColor)]="selectedChoirColor"
+    ></app-choir-swipe-select>
     <div>
       <mat-form-field>
         <input
@@ -53,12 +61,13 @@
           name="hymn"
           placeholder="Pick Hymn"
           type="text"
-        >
+        />
         <mat-autocomplete #autoHymns="matAutocomplete">
           <mat-option
             [value]="song"
             *ngFor="let song of filteredSongs | async"
-          >{{ song }}</mat-option>
+            >{{ song }}</mat-option
+          >
         </mat-autocomplete>
       </mat-form-field>
     </div>
@@ -69,7 +78,9 @@
         !selectedSession || !selectedChoirColor || !selectedSong.value
       "
       mat-raised-button
-    >Add Song</button>
+    >
+      Add Song
+    </button>
   </ng-template>
   <ng-template [ngIf]="selectedType.value === 'temple'">
     <div>
@@ -81,12 +92,13 @@
           name="temple"
           placeholder="Pick Temple"
           type="text"
-        >
+        />
         <mat-autocomplete #autoTemples="matAutocomplete">
           <mat-option
             [value]="place"
             *ngFor="let place of filteredStateOrCountries | async"
-          >{{ place }}</mat-option>
+            >{{ place }}</mat-option
+          >
         </mat-autocomplete>
       </mat-form-field>
     </div>
@@ -95,6 +107,8 @@
       (click)="addTemple()"
       [disabled]="!selectedStateOrCountry.value"
       mat-raised-button
-    >Add Temple</button>
+    >
+      Add Temple
+    </button>
   </ng-template>
 </form>

@@ -1,7 +1,9 @@
 <div style="padding: 4px 12px">
   <h1 class="fgc-flex-center">Welcome!</h1>
 
-  <a *ngIf="userHolder.isAdmin() | async" routerLink="/admin">Admin View</a>
+  <a *ngIf="userHolder.watchIsAdmin() | async" routerLink="/admin"
+    >Admin View</a
+  >
 
   <div>How to play:</div>
   <div>

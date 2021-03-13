@@ -11,6 +11,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ServerBusService } from '../websocket/server-bus.service';
 import { of } from 'rxjs';
 import { ScoreboardComponent } from '../scoreboard/scoreboard.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('GameComponent', () => {
   let component: GameComponent;
@@ -36,7 +37,11 @@ describe('GameComponent', () => {
           },
         },
       ],
-      imports: [MatExpansionModule, NoopAnimationsModule],
+      imports: [
+        MatExpansionModule,
+        HttpClientTestingModule,
+        NoopAnimationsModule,
+      ],
     }).compileComponents();
   }));
 

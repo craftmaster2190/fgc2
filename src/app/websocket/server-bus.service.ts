@@ -12,14 +12,32 @@ export class ServerBusService implements OnDestroy {
   private readonly serverAddress = env().webSocketUrl;
   public connection$: WebSocketSubject<any>;
   private userId;
+  private connected = false;
 
   public constructor(private readonly userHolder: UserHolderService) {}
 
   private getConnection(): WebSocketSubject<any> {
     if (!this.connection$) {
-      this.connection$ = webSocket(
-        this.serverAddress + '?userId=' + this.userId
-      );
+      this.connection$ = webSocket({
+        url: this.serverAddress + '?userId=' + this.userId,
+        openObserver: {
+          next: (value) => {
+            console.log('openObserver', value);
+            this.connected = true;
+          },
+        },
+        closeObserver: {
+          next: (value) => {
+            console.log('closeObserver', value);
+            this.connected = false;
+          },
+        },
+        closingObserver: {
+          next: (value) => {
+            console.log('closingObserver', value);
+          },
+        },
+      });
     }
     return this.connection$;
   }
@@ -40,5 +58,9 @@ export class ServerBusService implements OnDestroy {
   public disconnect(): void {
     this.connection$?.complete();
     this.connection$ = null;
+  }
+
+  public isConnected(): boolean {
+    return this.connected;
   }
 }

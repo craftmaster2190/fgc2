@@ -8,7 +8,7 @@ import {
 import Auth from '@aws-amplify/auth';
 import { Observable } from 'rxjs';
 import { UserHolderService } from './user-holder.service';
-import { first, tap } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 
 @Injectable()
 export class AdminGuard implements CanActivate {
@@ -26,7 +26,8 @@ export class AdminGuard implements CanActivate {
         this.userHolder.setUser(user);
         console.log('IsAdmin?');
         return this.userHolder
-          .isAdmin()
+          .watchIsAdmin()
+          .pipe(first())
           .toPromise()
           .then((isAdmin) => {
             console.log('IsAdmin2:', isAdmin);

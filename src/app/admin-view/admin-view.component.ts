@@ -8,7 +8,7 @@ import { apostles, firstPresidency } from '../data/people';
 import { camelCase } from 'change-case';
 import { Hymns } from '../data/hymns';
 import { CountryNames, StateNames } from '../data/countries';
-import { GameSocket } from '../game/game-socket.ts.service';
+import { GameSocket } from '../game/game-socket.service';
 import { Observable } from 'rxjs';
 import { first, map, startWith, tap } from 'rxjs/operators';
 import * as moment from 'moment';
@@ -79,8 +79,9 @@ export class AdminViewComponent implements OnInit {
 
   public addSpeaker(): void {
     this.userHolder
-      .getUserId()
+      .watchUserId()
       .pipe(
+        first(),
         tap((userId) => {
           this.serverBus.send({
             action: 'adminanswer',
@@ -101,8 +102,9 @@ export class AdminViewComponent implements OnInit {
 
   public addSong(): void {
     this.userHolder
-      .getUserId()
+      .watchUserId()
       .pipe(
+        first(),
         tap((userId) => {
           this.serverBus.send({
             action: 'adminanswer',
@@ -123,8 +125,9 @@ export class AdminViewComponent implements OnInit {
 
   public addTemple(): void {
     this.userHolder
-      .getUserId()
+      .watchUserId()
       .pipe(
+        first(),
         tap((userId) => {
           this.serverBus.send({
             action: 'adminanswer',
