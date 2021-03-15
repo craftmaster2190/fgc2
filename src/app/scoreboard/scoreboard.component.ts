@@ -15,6 +15,7 @@ import { MatSort } from '@angular/material/sort';
 })
 export class ScoreboardComponent implements AfterViewInit {
   public displayedColumns: string[] = ['username', 'score'];
+  public displayScoreboard: boolean;
   public datasource = new MatTableDataSource([]);
 
   public constructor(gameDataService: GameDataService) {
@@ -22,10 +23,12 @@ export class ScoreboardComponent implements AfterViewInit {
       .pipe(
         untilDestroyed(this),
         tap(() => {
+
           this.datasource.data = gameDataService.scores
             .slice()
             .sort(compareFor((score) => score.score))
             .reverse();
+          this.displayScoreboard = this.datasource.data.length > 0;
         })
       )
       .subscribe();

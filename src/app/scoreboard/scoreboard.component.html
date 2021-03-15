@@ -1,4 +1,4 @@
-<table [dataSource]="datasource" class="mat-elevation-z8" mat-table matSort>
+<table [dataSource]="datasource" class="mat-elevation-z8" mat-table matSort *ngIf = "displayScoreboard">
   <ng-container matColumnDef="username">
     <th *matHeaderCellDef mat-header-cell mat-sort-header>Name</th>
     <td *matCellDef="let element" mat-cell>{{ element.username }}</td>
