@@ -23,7 +23,6 @@ export class ScoreboardComponent implements AfterViewInit {
       .pipe(
         untilDestroyed(this),
         tap(() => {
-
           this.datasource.data = gameDataService.scores
             .slice()
             .sort(compareFor((score) => score.score))
