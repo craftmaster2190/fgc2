@@ -48,7 +48,7 @@ export class AppComponent {
         console.log('Go home', location.href);
         return this.ngZone.run(() => {
           console.log('send to home');
-          return this.router.navigate(['/home'], { replaceUrl: true });
+          // return this.router.navigate(['/home'], { replaceUrl: true });
         });
       })
       .then(() => (this.loading = false));

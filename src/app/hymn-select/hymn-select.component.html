@@ -1,23 +1,13 @@
-<div>{{ selectedHymnsSet.size }}</div>
-<alphabet-filter
-  [data]="hymns"
-  [withTemplate]="true"
-  *ngIf="!disabled"
-  height="700px"
-  listClass="search-list"
-  placeholder="Select Hymns"
-  propAlphaOrder="name"
-  propsSearch="name"
->
-  <ng-template let-item>
-    <div class="search-list-item">
-      <mat-checkbox
-        (change)="onCheckBox($event, item)"
-        [checked]="selectedHymnsSet.has(item.name)"
-        [disabled]="disabled"
-      >
-        <span>{{ item.name }}</span>
-      </mat-checkbox>
-    </div>
-  </ng-template>
-</alphabet-filter>
+<!--Carsons Light List-->
+<div class="listbox-area">
+  <div style="margin: 0 auto;">
+    <input type="text" id="myInput" #hymnInput [(ngModel)]="filterString" placeholder="Search for Hymn">
+    <ul id="listOfHymns">
+      <li id="listOfHymnsItem" *ngFor="let hymn of getFilteredHymns()">
+        <mat-checkbox [checked]="false">
+          <span class="hymn">{{hymn}}</span>
+        </mat-checkbox>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -103,7 +103,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ReactiveFormsModule,
     MatInputModule,
     MatTableModule,
-    MatSortModule,
+    MatSortModule
   ],
   providers: [
     AmplifyService,
@@ -117,4 +117,4 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

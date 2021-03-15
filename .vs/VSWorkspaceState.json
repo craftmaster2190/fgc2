@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\data",
+    "\\src\\app\\hymn-select",
+    "\\src\\app\\websocket"
+  ],
+  "SelectedNode": "\\src\\app\\hymn-select\\hymn-select.component.ts",
+  "PreviewInSolutionExplorer": false
+}
