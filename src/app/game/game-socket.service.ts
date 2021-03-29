@@ -151,19 +151,22 @@ export class GameSocket {
   }
 
   private initPageRefresh(): void {
+    const getUpdateTime = (node) => {
+      return node
+        .querySelector('meta[property="og:updated_time"]')
+        ?.getAttribute('content');
+    };
+
     const pageStarted = moment();
-    const currentUpdateTime = document.head
-      .querySelector('meta[property="og:updated_time"]')
-      ?.getAttribute('content');
+    const currentUpdateTime = getUpdateTime(document.head);
 
     timer(60000, 60000)
       .pipe(
         switchMap(() =>
           this.httpClient.get('index.html', { responseType: 'text' })
         ),
-        map(
-          (body) =>
-            body.match(/<meta content="(.+)" property="og:updated_time">/)?.[1]
+        map((body) =>
+          getUpdateTime(new DOMParser().parseFromString(body, 'text/html'))
         ),
         tap((newUpdateTime) => {
           if (newUpdateTime !== currentUpdateTime) {
