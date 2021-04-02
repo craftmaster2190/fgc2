@@ -22,6 +22,7 @@ export class HymnSelectComponent implements OnChanges, AfterViewInit {
   public selectedHymnsSet = new Set<string>();
   @Input() public selectedHymns: Array<string>;
   @Output() public selectedHymnsChange = new EventEmitter<Array<string>>();
+  @Input() public correct?: Set<string>;
   @Input() public disabled: boolean;
 
   public readonly hymns = Array.from(new Set<string>(Hymns))

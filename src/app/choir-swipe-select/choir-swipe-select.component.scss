@@ -1,0 +1,14 @@
+:host {
+  position: relative;
+  display: block;
+}
+
+$star-width: 36px;
+
+.gold-star {
+  position: absolute;
+  top: 26px;
+  left: calc(50% - 94px);
+  max-width: $star-width;
+  z-index: 1;
+}

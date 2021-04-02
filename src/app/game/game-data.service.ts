@@ -11,6 +11,39 @@ export interface PersonData {
   tieColor?: TieColor;
 }
 
+export type PersonNames =
+  | 'henryBEyring'
+  | 'dallinHOaks'
+  | 'russellMNelson'
+  | 'mRussellBallard'
+  | 'jeffreyRHolland'
+  | 'dieterFUchtdorf'
+  | 'davidABednar'
+  | 'quentinLCook'
+  | 'dToddChristofferson'
+  | 'neilLAndersen'
+  | 'ronaldARasband'
+  | 'garyEStevenson'
+  | 'daleGRenlund'
+  | 'gerritWGong'
+  | 'ulissesSoarses';
+export type PersonCorrectsValuesData = Record<
+  'sessionName' | 'tieColor',
+  Set<string>
+>;
+export type PersonCorrectsData = Record<PersonNames, PersonCorrectsValuesData>;
+export type ChoirCorrectsValuesData = Record<'choirColor', Set<string>>;
+export type ChoirCorrectsData = Record<
+  'choir',
+  Record<Session, ChoirCorrectsValuesData>
+>;
+export type SongCorrectsData = Record<'songs', Set<string>>;
+export type TempleCorrectsData = Record<'temple', Set<string>>;
+
+export type CorrectsData = Partial<
+  PersonCorrectsData & ChoirCorrectsData & SongCorrectsData & TempleCorrectsData
+>;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -210,7 +243,7 @@ export class GameDataService {
     },
   };
 
-  public corrects = {};
+  public corrects: CorrectsData = {};
 
   public scores: Array<{
     score: number;

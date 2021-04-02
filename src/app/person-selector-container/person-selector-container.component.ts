@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PersonData } from '../game/game-data.service';
+import {
+  PersonCorrectsValuesData,
+  PersonData,
+} from '../game/game-data.service';
 
 @Component({
   selector: 'app-person-selector-container',
@@ -8,6 +11,7 @@ import { PersonData } from '../game/game-data.service';
 })
 export class PersonSelectorContainerComponent implements OnInit {
   @Input() public person: PersonData;
+  @Input() public correct?: Partial<PersonCorrectsValuesData>;
   @Input() public disabled: boolean;
 
   public constructor() {}

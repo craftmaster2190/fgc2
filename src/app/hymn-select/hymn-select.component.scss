@@ -13,3 +13,20 @@
   left: auto;
   right: 20px;
 }
+
+.gold-star-container {
+  display: flex;
+  flex-direction: row;
+}
+
+$star-width: 28px;
+
+.gold-star {
+  max-width: $star-width;
+
+  @for $i from 0 through 10 {
+    &:nth-of-type(#{$i + 1}) {
+      left: $i * ($star-width);
+    }
+  }
+}

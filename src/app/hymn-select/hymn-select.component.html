@@ -1,4 +1,15 @@
-<div>{{ selectedHymnsSet.size }}</div>
+<div class="gold-star-container">
+  <ng-template [ngForOf]="selectedHymns" let-hymn ngFor>
+    <img
+      *ngIf="correct?.has(hymn)"
+      class="gold-star"
+      matTooltip="You correctly guessed {{ hymn }}!"
+      src="/assets/gold-star.png"
+    />
+  </ng-template>
+</div>
+
+<!--<div>{{ selectedHymnsSet.size }}</div>-->
 <alphabet-filter
   [data]="hymns"
   [withTemplate]="true"

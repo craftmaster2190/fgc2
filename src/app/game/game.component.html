@@ -20,16 +20,21 @@
     </mat-expansion-panel-header>
     <div class="first-presidency">
       <div class="instructions">Tap a face to guess</div>
-      <app-person-selector-container
-        [disabled]="timeDisabledService.isDisabled()"
-        [person]="gameData.answers.firstPresidency.russellMNelson"
-      ></app-person-selector-container>
+      <div class="first-presidency-prophet">
+        <app-person-selector-container
+          [correct]="gameData.corrects?.russellMNelson"
+          [disabled]="timeDisabledService.isDisabled()"
+          [person]="gameData.answers.firstPresidency.russellMNelson"
+        ></app-person-selector-container>
+      </div>
       <div class="first-presidency-counselors">
         <app-person-selector-container
+          [correct]="gameData.corrects?.dallinHOaks"
           [disabled]="timeDisabledService.isDisabled()"
           [person]="gameData.answers.firstPresidency.dallinHOaks"
         ></app-person-selector-container>
         <app-person-selector-container
+          [correct]="gameData.corrects?.henryBEyring"
           [disabled]="timeDisabledService.isDisabled()"
           [person]="gameData.answers.firstPresidency.henryBEyring"
         ></app-person-selector-container>
@@ -63,50 +68,62 @@
     <div class="fgc-flex-center">
       <div class="apostles">
         <app-person-selector-container
+          [correct]="gameData.corrects?.mRussellBallard"
           [disabled]="timeDisabledService.isDisabled()"
           [person]="gameData.answers.apostles.mRussellBallard"
         ></app-person-selector-container>
         <app-person-selector-container
+          [correct]="gameData.corrects?.jeffreyRHolland"
           [disabled]="timeDisabledService.isDisabled()"
           [person]="gameData.answers.apostles.jeffreyRHolland"
         ></app-person-selector-container>
         <app-person-selector-container
+          [correct]="gameData.corrects?.dieterFUchtdorf"
           [disabled]="timeDisabledService.isDisabled()"
           [person]="gameData.answers.apostles.dieterFUchtdorf"
         ></app-person-selector-container>
         <app-person-selector-container
+          [correct]="gameData.corrects?.davidABednar"
           [disabled]="timeDisabledService.isDisabled()"
           [person]="gameData.answers.apostles.davidABednar"
         ></app-person-selector-container>
         <app-person-selector-container
+          [correct]="gameData.corrects?.quentinLCook"
           [disabled]="timeDisabledService.isDisabled()"
           [person]="gameData.answers.apostles.quentinLCook"
         ></app-person-selector-container>
         <app-person-selector-container
+          [correct]="gameData.corrects?.dToddChristofferson"
           [disabled]="timeDisabledService.isDisabled()"
           [person]="gameData.answers.apostles.dToddChristofferson"
         ></app-person-selector-container>
         <app-person-selector-container
+          [correct]="gameData.corrects?.neilLAndersen"
           [disabled]="timeDisabledService.isDisabled()"
           [person]="gameData.answers.apostles.neilLAndersen"
         ></app-person-selector-container>
         <app-person-selector-container
+          [correct]="gameData.corrects?.ronaldARasband"
           [disabled]="timeDisabledService.isDisabled()"
           [person]="gameData.answers.apostles.ronaldARasband"
         ></app-person-selector-container>
         <app-person-selector-container
+          [correct]="gameData.corrects?.garyEStevenson"
           [disabled]="timeDisabledService.isDisabled()"
           [person]="gameData.answers.apostles.garyEStevenson"
         ></app-person-selector-container>
         <app-person-selector-container
+          [correct]="gameData.corrects?.daleGRenlund"
           [disabled]="timeDisabledService.isDisabled()"
           [person]="gameData.answers.apostles.daleGRenlund"
         ></app-person-selector-container>
         <app-person-selector-container
+          [correct]="gameData.corrects?.gerritWGong"
           [disabled]="timeDisabledService.isDisabled()"
           [person]="gameData.answers.apostles.gerritWGong"
         ></app-person-selector-container>
         <app-person-selector-container
+          [correct]="gameData.corrects?.ulissesSoarses"
           [disabled]="timeDisabledService.isDisabled()"
           [person]="gameData.answers.apostles.ulissesSoarses"
         ></app-person-selector-container>
@@ -130,6 +147,11 @@
         </div>
         <app-choir-swipe-select
           [(selectedColor)]="gameData.answers.choirColors[session]"
+          [correct]="
+            gameData.corrects?.choir
+              ? gameData.corrects?.choir[session]?.choirColor
+              : null
+          "
           [disabled]="timeDisabledService.isDisabled()"
         ></app-choir-swipe-select>
       </ng-template>
@@ -148,6 +170,7 @@
       </div>
       <app-hymn-select
         [(selectedHymns)]="gameData.answers.selectedHymns"
+        [correct]="gameData.corrects?.songs"
         [disabled]="timeDisabledService.isDisabled()"
       ></app-hymn-select>
     </div>
@@ -168,6 +191,7 @@
       <div>I think these states of the U.S.A will get new temples: Max 5</div>
       <app-temple-map
         [(selectedRegionNames)]="gameData.answers.newTemples.usa"
+        [correct]="gameData.corrects?.temple"
         [disabled]="timeDisabledService.isDisabled()"
         mode="usa"
       ></app-temple-map>
@@ -179,6 +203,7 @@
       </div>
       <app-temple-map
         [(selectedRegionNames)]="gameData.answers.newTemples.world"
+        [correct]="gameData.corrects?.temple"
         [disabled]="timeDisabledService.isDisabled()"
         mode="world"
       ></app-temple-map>
