@@ -41,6 +41,7 @@ export class TempleMapComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Output() public selectedRegionNamesChange = new EventEmitter<
     Array<string>
   >();
+  @Input() public correct?: Set<string>;
   @Input() public disabled: boolean;
   private mapObject;
   private selectedRegions = [];

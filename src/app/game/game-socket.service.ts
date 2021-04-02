@@ -122,7 +122,7 @@ export class GameSocket {
                 } else if (result.type === 'scores') {
                   this.gameData.scores = result.scores;
                 } else if (result.type === 'corrects') {
-                  this.gameData.corrects = result.corrects;
+                  this.gameData.corrects = this.applyCorrects(result.corrects);
                 } else {
                   // tslint:disable-next-line:no-console
                   console.log('result', result);
@@ -186,5 +186,63 @@ export class GameSocket {
         })
       )
       .subscribe();
+  }
+
+  private applyCorrects(corrects: Array<any>): any {
+    // {
+    //     "type": "corrects",
+    //     "corrects": [
+    //         {
+    //             "temple": "Utah",
+    //             "timestamp": 1617328117
+    //         },
+    //         {
+    //             "tieColor": "yellow",
+    //             "sessionName": "PriesthoodSession",
+    //             "speaker": "russellMNelson",
+    //             "timestamp": 1617328096
+    //         },
+    //         {
+    //             "song": "High on the Mountain Top",
+    //             "choirColor": "purple",
+    //             "sessionName": "PriesthoodSession",
+    //             "timestamp": 1617328109
+    //         }
+    //     ]
+    // }
+    return corrects.reduce((obj, correctValue) => {
+      if (
+        correctValue.speaker &&
+        correctValue.sessionName &&
+        correctValue.tieColor
+      ) {
+        obj[correctValue.speaker] = obj[correctValue.speaker] ?? {};
+        obj[correctValue.speaker].sessionName =
+          obj[correctValue.speaker].sessionName ?? new Set<string>();
+        obj[correctValue.speaker].sessionName.add(correctValue.sessionName);
+        obj[correctValue.speaker].tieColor =
+          obj[correctValue.speaker].tieColor ?? new Set<string>();
+        obj[correctValue.speaker].tieColor.add(correctValue.tieColor);
+      } else if (
+        correctValue.choirColor &&
+        correctValue.sessionName &&
+        correctValue.song
+      ) {
+        obj.choir = obj.choir ?? {};
+        obj.choir[correctValue.sessionName] =
+          obj.choir[correctValue.sessionName] ?? {};
+        obj.choir[correctValue.sessionName].choirColor =
+          obj.choir[correctValue.sessionName].choirColor ?? new Set<string>();
+        obj.choir[correctValue.sessionName].choirColor.add(
+          correctValue.choirColor
+        );
+        obj.songs = obj.songs ?? new Set<string>();
+        obj.songs.add(correctValue.song);
+      } else if (correctValue.temple) {
+        obj.temple = obj.temple ?? new Set<string>();
+        obj.temple.add(correctValue.temple);
+      }
+      return obj;
+    }, {});
   }
 }

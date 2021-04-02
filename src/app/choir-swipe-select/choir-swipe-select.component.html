@@ -8,3 +8,9 @@
   [selectedIndex]="selectedIndex"
   style="height: 215px"
 ></app-swipe-select>
+<img
+  *ngIf="correct?.has(selectedColor)"
+  class="gold-star"
+  matTooltip="You correctly guessed the choir's color!"
+  src="/assets/gold-star.png"
+>

@@ -5,3 +5,24 @@
   [disabled]="disabled"
   [src]="person.src"
 ></app-person-selector>
+<img
+  *ngIf="correct?.sessionName?.has(person.session)"
+  class="gold-star"
+  matTooltip="You correctly guessed the session!"
+  src="/assets/gold-star.png"
+/>
+<img
+  *ngIf="correct?.tieColor?.has(person.tieColor)"
+  class="gold-star"
+  matTooltip="You correctly guessed the tie color!"
+  src="/assets/gold-star.png"
+/>
+<img
+  *ngIf="
+    correct?.sessionName?.has(person.session) &&
+    correct?.tieColor?.has(person.tieColor)
+  "
+  class="gold-star"
+  matTooltip="You correctly guessed the session and tie color! Extra points!"
+  src="/assets/gold-star.png"
+/>

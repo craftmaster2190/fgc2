@@ -1,0 +1,18 @@
+:host {
+  position: relative;
+  display: block;
+}
+
+$star-width: 28px;
+
+.gold-star {
+  position: absolute;
+  top: 8px;
+  max-width: $star-width;
+
+  @for $i from 0 through 4 {
+    &:nth-of-type(#{$i + 1}) {
+      left: $i * ($star-width);
+    }
+  }
+}
