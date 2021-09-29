@@ -60,15 +60,30 @@ export async function handler(
     });
 
     console.log(`Scanning Scores`);
-    const scanResults = await documentClient
-      .scan({ TableName: 'Scores' })
-      .promise();
+    let scanItems: AWS.DynamoDB.DocumentClient.ItemList = [];
+    const scanParams: AWS.DynamoDB.DocumentClient.ScanInput = {
+      TableName: 'Scores',
+    };
+    while (true) {
+      const scanResults = await documentClient.scan(scanParams).promise();
+      scanItems = [...scanItems, ...scanResults.Items];
+
+      // continue scanning if we have more movies, because
+      // scan can retrieve a maximum of 1MB of data
+      if (typeof scanResults.LastEvaluatedKey !== 'undefined') {
+        console.log('Scanning for more...');
+        scanParams.ExclusiveStartKey = scanResults.LastEvaluatedKey;
+      } else {
+        break;
+      }
+    }
+
     console.log(`Done Scanning Scores`);
 
     await Promise.all(
-      scanResults.Items.map((item, i) => {
+      scanItems.map((item, i) => {
         console.log(
-          `Copying #${i}/${scanResults.Items.length} ` + JSON.stringify(item)
+          `Copying #${i}/${scanItems.length} ` + JSON.stringify(item)
         );
         return documentClient.put({ TableName: newTableName, Item: item });
       })
