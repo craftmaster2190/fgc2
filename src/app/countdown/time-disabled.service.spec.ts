@@ -11,7 +11,7 @@ describe('TimeDisabledService', () => {
   const unixStart = {
     [Session.SaturdayMorningSession]: 1617465600,
     [Session.SaturdayAfternoonSession]: 1617480000,
-    [Session.PriesthoodSession]: 1617494400,
+    [Session.SaturdayEveningSession]: 1617494400,
     [Session.SundayMorningSession]: 1617552000,
     [Session.SundayAfternoonSession]: 1617566400,
   };
@@ -145,7 +145,7 @@ describe('TimeDisabledService', () => {
       });
 
       if (
-        session !== Session.PriesthoodSession &&
+        session !== Session.SaturdayEveningSession &&
         session !== Session.SundayAfternoonSession
       ) {
         it('session ' + session + ' timeUntil 5 minutes after', () => {
@@ -160,9 +160,11 @@ describe('TimeDisabledService', () => {
     });
 
     it(
-      'session ' + Session.PriesthoodSession + ' timeUntil 5 minutes after',
+      'session ' +
+        Session.SaturdayEveningSession +
+        ' timeUntil 5 minutes after',
       () => {
-        const unixStartTime = unixStart[Session.PriesthoodSession];
+        const unixStartTime = unixStart[Session.SaturdayEveningSession];
         const duration = moment.duration(125, 'minute');
         nowService.now = () => moment.unix(unixStartTime).add(duration);
         expect(timeDisabledService.timeUntilNext()?.toISOString()).toBe(

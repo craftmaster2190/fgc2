@@ -232,7 +232,7 @@ export class GameDataService {
     choirColors: {
       [Session.SaturdayMorningSession]: randomElement(ChoirColors),
       [Session.SaturdayAfternoonSession]: randomElement(ChoirColors),
-      [Session.PriesthoodSession]: randomElement(ChoirColors),
+      [Session.SaturdayEveningSession]: randomElement(ChoirColors),
       [Session.SundayMorningSession]: randomElement(ChoirColors),
       [Session.SundayAfternoonSession]: randomElement(ChoirColors),
     },

@@ -143,4 +143,21 @@ export class AdminViewComponent implements OnInit {
       )
       .subscribe();
   }
+
+  public freezeScores(): void {
+    if (window.confirm('Freeze the scores for April 2021?')) {
+      this.userHolder
+        .watchUserId()
+        .pipe(
+          first(),
+          tap((userId) => {
+            this.serverBus.send({
+              action: 'adminfreezescores',
+              userId,
+            });
+          })
+        )
+        .subscribe();
+    }
+  }
 }

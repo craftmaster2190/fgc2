@@ -79,3 +79,8 @@ functions:
     events:
       - websocket:
           route: adminanswer
+  onAdminFreezeScoresHandler:
+    handler: onAdminFreezeScores.handler
+    events:
+      - websocket:
+          route: adminfreezescores

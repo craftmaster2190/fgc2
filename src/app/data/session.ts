@@ -1,7 +1,7 @@
 export enum Session {
   SaturdayMorningSession = 'SaturdayMorningSession',
   SaturdayAfternoonSession = 'SaturdayAfternoonSession',
-  PriesthoodSession = 'PriesthoodSession',
+  SaturdayEveningSession = 'SaturdayEveningSession',
   SundayMorningSession = 'SundayMorningSession',
   SundayAfternoonSession = 'SundayAfternoonSession',
 }
@@ -9,7 +9,7 @@ export enum Session {
 export const Sessions = [
   Session.SaturdayMorningSession,
   Session.SaturdayAfternoonSession,
-  Session.PriesthoodSession,
+  Session.SaturdayEveningSession,
   Session.SundayMorningSession,
   Session.SundayAfternoonSession,
 ];

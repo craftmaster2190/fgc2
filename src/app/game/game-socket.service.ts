@@ -198,14 +198,14 @@ export class GameSocket {
     //         },
     //         {
     //             "tieColor": "yellow",
-    //             "sessionName": "PriesthoodSession",
+    //             "sessionName": "SaturdayEveningSession",
     //             "speaker": "russellMNelson",
     //             "timestamp": 1617328096
     //         },
     //         {
     //             "song": "High on the Mountain Top",
     //             "choirColor": "purple",
-    //             "sessionName": "PriesthoodSession",
+    //             "sessionName": "SaturdayEveningSession",
     //             "timestamp": 1617328109
     //         }
     //     ]
