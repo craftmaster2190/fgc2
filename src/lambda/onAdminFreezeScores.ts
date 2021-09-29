@@ -38,7 +38,10 @@ export async function handler(
             KeyType: 'HASH',
           },
         ],
-        // more params
+        ProvisionedThroughput: {
+          ReadCapacityUnits: 5,
+          WriteCapacityUnits: 5,
+        },
       })
       .promise();
 
