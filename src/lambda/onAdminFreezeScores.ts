@@ -12,7 +12,7 @@ export async function handler(
     apiVersion: '2012-08-10',
   });
 
-  const newTableName = 'ScoresApril2021';
+  const newTableName = 'ScoresOctober2021';
 
   const listTablesData = await dynamodb.listTables({}).promise();
   const tableExists = !!listTablesData.TableNames.find(
