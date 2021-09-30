@@ -85,9 +85,12 @@ export async function handler(
   console.log(`Done Scanning Scores`);
 
   await Promise.all(
-    scanItems.map((item, i) => {
+    scanItems.map(async (item, i) => {
       console.log(`Copying #${i}/${scanItems.length} ` + JSON.stringify(item));
-      return documentClient.put({ TableName: newTableName, Item: item });
+      const putResponse = await documentClient
+        .put({ TableName: newTableName, Item: item })
+        .promise();
+      console.log(`Done copying ${i} ` + putResponse);
     })
   );
 
