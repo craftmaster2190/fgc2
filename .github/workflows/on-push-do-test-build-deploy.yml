@@ -41,10 +41,10 @@ jobs:
           sed --in-place "s|XXX_BUILD_TIME_XXX|$( date +%s )|" src/index.html
           ./deploy
 
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v1
-        with:
-          name: Build Files
-          path: dist
+#      - name: Upload Artifacts
+#        uses: actions/upload-artifact@v1
+#        with:
+#          name: Build Files
+#          path: dist
 
 
