@@ -1,6 +1,6 @@
-import { APIGatewayEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { responseBody } from './domain/responseBody';
-import { initSentry } from './domain/sentry';
+import {APIGatewayEvent, APIGatewayProxyResult} from 'aws-lambda';
+import {responseBody} from './domain/responseBody';
+import {initSentry} from './domain/sentry';
 import * as AWS from 'aws-sdk';
 
 initSentry();
@@ -12,7 +12,7 @@ export async function handler(
     apiVersion: '2012-08-10',
   });
 
-  const newTableName = 'ScoresOctober2021';
+  const newTableName = 'ScoresApril2022';
 
   const listTablesData = await dynamodb.listTables({}).promise();
   const tableExists = !!listTablesData.TableNames.find(
@@ -53,7 +53,7 @@ export async function handler(
       await new Promise((r) => setTimeout(r, 1000));
 
       describeTableResult = await dynamodb
-        .describeTable({ TableName: newTableName })
+        .describeTable({TableName: newTableName})
         .promise();
     }
     console.log(`Done creating ` + newTableName);
@@ -88,7 +88,7 @@ export async function handler(
     scanItems.map(async (item, i) => {
       console.log(`Copying #${i}/${scanItems.length} ` + JSON.stringify(item));
       const putResponse = await documentClient
-        .put({ TableName: newTableName, Item: item })
+        .put({TableName: newTableName, Item: item})
         .promise();
       console.log(`Done copying ${i} ` + putResponse);
     })
