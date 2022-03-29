@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { NowService } from './now.service';
-import { Session, Sessions } from '../data/session';
+import {Injectable} from '@angular/core';
+import {NowService} from './now.service';
+import {Session, Sessions} from '../data/session';
 import * as moment from 'moment';
-import { compareFor } from '../../util/comparator';
+import {compareFor} from '../../util/comparator';
 
 @Injectable({
   providedIn: 'root',
@@ -13,21 +13,23 @@ export class TimeDisabledService {
   // As of March 2021, all conferences happen in MDT -06:00
   public readonly sessionStarts = {
     [Session.SaturdayMorningSession]: moment.utc(
-      '2021-10-02 10:00:00.000-06:00'
+      '2022-04-02 10:00:00.000-06:00'
     ),
     [Session.SaturdayAfternoonSession]: moment.utc(
-      '2021-10-02 14:00:00.000-06:00'
+      '2022-04-02 14:00:00.000-06:00'
     ),
     [Session.SaturdayEveningSession]: moment.utc(
-      '2021-10-02 18:00:00.000-06:00'
+      '2022-04-02 18:00:00.000-06:00'
     ),
-    [Session.SundayMorningSession]: moment.utc('2021-10-03 10:00:00.000-06:00'),
+    [Session.SundayMorningSession]: moment.utc(
+      '2022-04-03 10:00:00.000-06:00'),
     [Session.SundayAfternoonSession]: moment.utc(
-      '2021-10-03 14:00:00.000-06:00'
+      '2022-04-03 14:00:00.000-06:00'
     ),
   };
 
-  public constructor(private readonly nowService: NowService) {}
+  public constructor(private readonly nowService: NowService) {
+  }
 
   public getCurrentSession(now = this.nowService.now()): Session {
     return Sessions.find(

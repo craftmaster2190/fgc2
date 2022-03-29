@@ -1,24 +1,24 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { TimeDisabledService } from './time-disabled.service';
-import { Session, Sessions } from '../data/session';
-import { NowService } from './now.service';
+import {TimeDisabledService} from './time-disabled.service';
+import {Session, Sessions} from '../data/session';
+import {NowService} from './now.service';
 import * as moment from 'moment';
 
 describe('TimeDisabledService', () => {
   let timeDisabledService: TimeDisabledService;
   let nowService: NowService;
   const unixStart = {
-    [Session.SaturdayMorningSession]: 1617465600,
-    [Session.SaturdayAfternoonSession]: 1617480000,
-    [Session.SaturdayEveningSession]: 1617494400,
-    [Session.SundayMorningSession]: 1617552000,
-    [Session.SundayAfternoonSession]: 1617566400,
+    [Session.SaturdayMorningSession]: 1648915200,
+    [Session.SaturdayAfternoonSession]: 1648929600,
+    [Session.SaturdayEveningSession]: 1648944000,
+    [Session.SundayMorningSession]: 1649001600,
+    [Session.SundayAfternoonSession]: 1649016000,
   };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [{ provide: NowService, useValue: {} }],
+      providers: [{provide: NowService, useValue: {}}],
     });
     timeDisabledService = TestBed.inject(TimeDisabledService);
     nowService = TestBed.inject(NowService);
@@ -82,8 +82,8 @@ describe('TimeDisabledService', () => {
           nowService.now = () =>
             moment.unix(
               unixStartTime +
-                timeDisabledService.sessionDuration.asSeconds() -
-                1
+              timeDisabledService.sessionDuration.asSeconds() -
+              1
             );
           expect(timeDisabledService.isDisabled()).toBeTruthy(
             'disabled right before end of session'
@@ -161,8 +161,8 @@ describe('TimeDisabledService', () => {
 
     it(
       'session ' +
-        Session.SaturdayEveningSession +
-        ' timeUntil 5 minutes after',
+      Session.SaturdayEveningSession +
+      ' timeUntil 5 minutes after',
       () => {
         const unixStartTime = unixStart[Session.SaturdayEveningSession];
         const duration = moment.duration(125, 'minute');
@@ -175,8 +175,8 @@ describe('TimeDisabledService', () => {
 
     it(
       'session ' +
-        Session.SundayAfternoonSession +
-        ' timeUntil 5 minutes after',
+      Session.SundayAfternoonSession +
+      ' timeUntil 5 minutes after',
       () => {
         const unixStartTime = unixStart[Session.SundayAfternoonSession];
         const duration = moment.duration(125, 'minute');
