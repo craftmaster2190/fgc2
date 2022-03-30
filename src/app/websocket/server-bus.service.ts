@@ -1,6 +1,6 @@
 import {Injectable, isDevMode, OnDestroy} from '@angular/core';
 import {WebSocketSubject} from 'rxjs/internal-compatibility';
-import {Observable, Subject, Subscription} from 'rxjs';
+import {fromEvent, Observable, Subject, Subscription} from 'rxjs';
 import {webSocket} from 'rxjs/webSocket';
 import {env} from '../../environments/environment.getter';
 
@@ -27,7 +27,16 @@ export class ServerBusService implements OnDestroy {
     this.userId = userId;
     this.connectionSubscription = this.getConnection().subscribe();
 
-    // fromEvent(window, 'focus').subscribe(() => this.getConnection());
+    // Fail safe
+    fromEvent(window, 'focus').subscribe(() => {
+      if (!this.connected) {
+        setTimeout(() => {
+          if (!this.connected) {
+            location.reload();
+          }
+        }, 3000);
+      }
+    });
     // fromEvent(window, 'blur').subscribe(() => this.disconnect());
 
     this.onDisconnect().subscribe(() => {
