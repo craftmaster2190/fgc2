@@ -1,19 +1,13 @@
-import {
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
-} from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Auth } from 'aws-amplify';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Auth} from 'aws-amplify';
 
-import { from, Observable } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
+import {from, Observable} from 'rxjs';
+import {catchError, switchMap} from 'rxjs/operators';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
   public constructor() {
-    console.log('JwtInterceptor');
   }
 
   public intercept(
@@ -30,11 +24,10 @@ export class JwtInterceptor implements HttpInterceptor {
             Authorization: `Bearer ${jwt}`,
           },
         });
-        console.log('Cloned', withAuthRequest);
         return next.handle(withAuthRequest);
       }),
       catchError((err) => {
-        console.log('Error ', err);
+        console.log('JwtInterceptor: Error ', err);
         return next.handle(request);
       })
     );

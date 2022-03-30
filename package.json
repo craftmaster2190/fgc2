@@ -16,6 +16,7 @@
     "spellcheck": "cspell \"./**/*\"",
     "depcheck": "depcheck",
     "precommit": "npm run lint:fix",
+    "prepare": "husky install",
     "e2e": "ng e2e"
   },
   "private": true,

@@ -1,50 +1,42 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { WebSocketSubject } from 'rxjs/internal-compatibility';
-import { Observable } from 'rxjs';
-import { webSocket } from 'rxjs/webSocket';
-import { UserHolderService } from './user-holder.service';
-import { env } from '../../environments/environment.getter';
+import {Injectable, isDevMode, OnDestroy} from '@angular/core';
+import {WebSocketSubject} from 'rxjs/internal-compatibility';
+import {Observable, Subject, Subscription} from 'rxjs';
+import {webSocket} from 'rxjs/webSocket';
+import {env} from '../../environments/environment.getter';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ServerBusService implements OnDestroy {
-  private readonly serverAddress = env().webSocketUrl;
   public connection$: WebSocketSubject<any>;
+  private readonly serverAddress = env().webSocketUrl;
   private userId;
   private connected = false;
 
-  public constructor(private readonly userHolder: UserHolderService) {}
+  private readonly connectionFacade = new Subject<any>();
+  private readonly reconnectionNotifier = new Subject<any>();
+  private readonly disconnectionNotifier = new Subject<any>();
+  private connectionSubscription: Subscription;
+  private openSubscription: Subscription;
+  private connectionCount = 0;
 
-  private getConnection(): WebSocketSubject<any> {
-    if (!this.connection$) {
-      this.connection$ = webSocket({
-        url: this.serverAddress + '?userId=' + this.userId,
-        openObserver: {
-          next: (value) => {
-            console.log('openObserver', value);
-            this.connected = true;
-          },
-        },
-        closeObserver: {
-          next: (value) => {
-            console.log('closeObserver', value);
-            this.connected = false;
-          },
-        },
-        closingObserver: {
-          next: (value) => {
-            console.log('closingObserver', value);
-          },
-        },
-      });
-    }
-    return this.connection$;
+  public constructor() {
   }
 
   public connect(userId): Observable<any> {
     this.userId = userId;
-    return this.getConnection();
+    this.connectionSubscription = this.getConnection().subscribe();
+
+    // fromEvent(window, 'focus').subscribe(() => this.getConnection());
+    // fromEvent(window, 'blur').subscribe(() => this.disconnect());
+
+    this.onDisconnect().subscribe(() => {
+      if (!this.connectionSubscription) {
+        console.log('WebSocket Reconnecting...');
+        this.connectionSubscription = this.getConnection().subscribe();
+      }
+    });
+    return this.connectionFacade.asObservable();
   }
 
   public send(data: any): void {
@@ -62,5 +54,54 @@ export class ServerBusService implements OnDestroy {
 
   public isConnected(): boolean {
     return this.connected;
+  }
+
+  public onReconnect(): Observable<any> {
+    return this.reconnectionNotifier.asObservable();
+  }
+
+  public onDisconnect(): Observable<any> {
+    return this.disconnectionNotifier.asObservable();
+  }
+
+  private getConnection(): WebSocketSubject<any> {
+    if (!this.connection$) {
+      this.connection$ = webSocket({
+        url: this.serverAddress + '?userId=' + this.userId,
+        openObserver: {
+          next: (value) => {
+            console.log('WebSocket open', value, 'connectionCount=', this.connectionCount);
+            this.connected = true;
+
+            this.openSubscription = this.connection$.subscribe(msg => this.connectionFacade.next(msg));
+            if (this.connectionCount > 0) {
+              this.reconnectionNotifier.next();
+            }
+            this.connectionCount++;
+          },
+        },
+        closeObserver: {
+          next: (value) => {
+            console.log('WebSocket close', value);
+            this.connected = false;
+            this.openSubscription.unsubscribe();
+            this.openSubscription = null;
+            this.connection$ = null;
+            this.connectionSubscription.unsubscribe();
+            this.connectionSubscription = null;
+            this.disconnectionNotifier.next();
+          },
+        },
+        closingObserver: {
+          next: (value) => {
+            console.log('WebSocket closing', value);
+          },
+        },
+      });
+    }
+    if (isDevMode()) {
+      (window as any).socket = this.connection$;
+    }
+    return this.connection$;
   }
 }

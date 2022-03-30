@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {Observable, ReplaySubject} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -8,10 +8,10 @@ import { map } from 'rxjs/operators';
 export class UserHolderService {
   private readonly user = new ReplaySubject<any>(1);
 
-  public constructor() {}
+  public constructor() {
+  }
 
   public setUser(user): void {
-    console.log('setUser', user);
     this.user.next(user);
   }
 

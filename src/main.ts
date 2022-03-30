@@ -1,15 +1,15 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppModule } from './app/app.module';
+import {enableProdMode} from '@angular/core';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {AppModule} from './app/app.module';
 import Amplify from 'aws-amplify';
-import { env } from './environments/environment.getter';
-import { Optional } from './app/util/optional';
+import {env} from './environments/environment.getter';
+import {Optional} from './app/util/optional';
 import * as Sentry from '@sentry/browser';
 
 (window as any).sentryIsRunning = Optional.of((window as any)._sentryDsn)
   .filter((dsn) => dsn && !dsn.startsWith('XXX'))
   .map((dsn) => {
-    Sentry.init({ dsn });
+    Sentry.init({dsn});
     return true;
   })
   .orElse(false);
@@ -34,6 +34,6 @@ if (env().production) {
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
   .catch((err) => {
-    console.error(err);
+    console.error('Main:', err);
     return Promise.reject(err);
   });
